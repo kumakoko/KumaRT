@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28010.2048
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LibKRT", "LibKRT\LibKRT.vcxproj", "{D3295BB3-9702-4C36-A4D3-AD50C20A7299}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KRTForge", "KRTForge\KRTForge.vcxproj", "{D107006E-F4C2-48BC-850B-490EAC284DFE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{D3295BB3-9702-4C36-A4D3-AD50C20A7299}.Release|x64.Build.0 = Release|x64
 		{D3295BB3-9702-4C36-A4D3-AD50C20A7299}.Release|x86.ActiveCfg = Release|Win32
 		{D3295BB3-9702-4C36-A4D3-AD50C20A7299}.Release|x86.Build.0 = Release|Win32
+		{D107006E-F4C2-48BC-850B-490EAC284DFE}.Debug|x64.ActiveCfg = Debug|x64
+		{D107006E-F4C2-48BC-850B-490EAC284DFE}.Debug|x64.Build.0 = Debug|x64
+		{D107006E-F4C2-48BC-850B-490EAC284DFE}.Debug|x86.ActiveCfg = Debug|Win32
+		{D107006E-F4C2-48BC-850B-490EAC284DFE}.Debug|x86.Build.0 = Debug|Win32
+		{D107006E-F4C2-48BC-850B-490EAC284DFE}.Release|x64.ActiveCfg = Release|x64
+		{D107006E-F4C2-48BC-850B-490EAC284DFE}.Release|x64.Build.0 = Release|x64
+		{D107006E-F4C2-48BC-850B-490EAC284DFE}.Release|x86.ActiveCfg = Release|Win32
+		{D107006E-F4C2-48BC-850B-490EAC284DFE}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
