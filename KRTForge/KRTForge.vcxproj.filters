@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="targetver.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Resource.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -27,12 +24,36 @@
     <ClInclude Include="krt_forge_app.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="krt_render_thread.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="krt_render_canvas.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="krt_custom_events.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="krt_render_pixel.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="krt_tools_macro.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="krt_forge_pch.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="krt_forge_app.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="krt_render_canvas.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="krt_render_thread.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="krt_render_pixel.cc">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

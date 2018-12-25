@@ -15,68 +15,41 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER I
 ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **************************************************************************************************************************/
 /*!
- * \file krt_forge_app.h
- * \date 2018/12/25 10:18
+ * \file krt_render_thread.h
+ * \date 2018/12/25 10:29
  *
- * \author Administrator
- * Contact: user@company.com
+ * \author xiong xinke
+ * Contact: sun_of_lover@sina.com
  *
  * \brief 
  *
- * TODO: long description
+ * TODO: 用来执行渲染计算的后台线程
  *
  * \note
 */
-#ifndef krt_forge_app_h__
-#define krt_forge_app_h__
+#ifndef krt_render_thread_h__
+#define krt_render_thread_h__
 
-using namespace std;
-
-class RayTracingForgeFrame;
 class RenderCanvas;
-class RenderThread;
 class RenderPixel;
 
-class RayTracingForgeApp : public wxApp
+class RenderThread : public wxThread
 {
 public:
-	virtual bool OnInit();
-	virtual int OnExit();
-	virtual void SetStatusText(const wxString& text, int number = 0);
-private:
-	RayTracingForgeFrame *frame;
-	DECLARE_EVENT_TABLE()
-};
-
-class RayTracingForgeFrame : public wxFrame
-{
-public:
-	RayTracingForgeFrame(const wxPoint& pos, const wxSize& size);
-
-	//event handlers
-	void OnQuit(wxCommandEvent& event);
-	void OnOpenFile(wxCommandEvent& event);
-	void OnSaveFile(wxCommandEvent& event);
-	void OnRenderStart(wxCommandEvent& event);
-	void OnRenderCompleted(wxCommandEvent& event);
-	void OnRenderPause(wxCommandEvent& event);
-	void OnRenderResume(wxCommandEvent& event);
+	RenderThread(RenderCanvas* c/*, World* w*/) : wxThread(), /*world(w), */canvas(c) {}
+	virtual void *Entry();
+	virtual void OnExit();
+	virtual void setPixel(int x, int y, int red, int green, int blue);
 
 private:
-	RenderCanvas *canvas; //where the rendering takes place
-	wxString currentPath; //for file dialogues
-	DECLARE_EVENT_TABLE()
+	void NotifyCanvas();
+
+	//World* world;
+	RenderCanvas* canvas;
+
+	std::vector<RenderPixel*> pixels;
+	wxStopWatch* timer;
+	long lastUpdateTime;
 };
 
-//IDs for menu items
-enum
-{
-	Menu_File_Quit = 100,
-	Menu_File_Open,
-	Menu_File_Save,
-	Menu_Render_Start,
-	Menu_Render_Pause,
-	Menu_Render_Resume
-};
-
-#endif // krt_forge_app_h__
+#endif // krt_render_thread_h__
