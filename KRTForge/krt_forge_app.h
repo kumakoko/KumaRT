@@ -40,43 +40,43 @@ class RenderPixel;
 class RayTracingForgeApp : public wxApp
 {
 public:
-	virtual bool OnInit();
-	virtual int OnExit();
-	virtual void SetStatusText(const wxString& text, int number = 0);
+    virtual bool OnInit();
+    virtual int OnExit();
+    virtual void SetStatusText(const wxString& text, int number = 0);
 private:
-	RayTracingForgeFrame *frame;
-	DECLARE_EVENT_TABLE()
+    RayTracingForgeFrame *frame;
+    DECLARE_EVENT_TABLE()
 };
 
 class RayTracingForgeFrame : public wxFrame
 {
 public:
-	RayTracingForgeFrame(const wxPoint& pos, const wxSize& size);
+    RayTracingForgeFrame(const wxPoint& pos, const wxSize& size);
 
-	//event handlers
-	void OnQuit(wxCommandEvent& event);
-	void OnOpenFile(wxCommandEvent& event);
-	void OnSaveFile(wxCommandEvent& event);
-	void OnRenderStart(wxCommandEvent& event);
-	void OnRenderCompleted(wxCommandEvent& event);
-	void OnRenderPause(wxCommandEvent& event);
-	void OnRenderResume(wxCommandEvent& event);
+    //event handlers
+    void OnQuit(wxCommandEvent& event);
+    void OnOpenFile(wxCommandEvent& event);
+    void OnSaveFile(wxCommandEvent& event);
+    void OnRenderStart(wxCommandEvent& event);
+    void OnRenderCompleted(wxCommandEvent& event);
+    void OnRenderPause(wxCommandEvent& event);
+    void OnRenderResume(wxCommandEvent& event);
 
 private:
-	RenderCanvas *canvas; //where the rendering takes place
-	wxString currentPath; //for file dialogues
-	DECLARE_EVENT_TABLE()
+    RenderCanvas *canvas; //where the rendering takes place
+    wxString currentPath; //for file dialogues
+    DECLARE_EVENT_TABLE()
 };
 
 //IDs for menu items
 enum
 {
-	Menu_File_Quit = 100,
-	Menu_File_Open,
-	Menu_File_Save,
-	Menu_Render_Start,
-	Menu_Render_Pause,
-	Menu_Render_Resume
+    Menu_File_Quit = 100,
+    Menu_File_Open,
+    Menu_File_Save,
+    Menu_Render_Start,
+    Menu_Render_Pause,
+    Menu_Render_Resume
 };
 
 #endif // krt_forge_app_h__

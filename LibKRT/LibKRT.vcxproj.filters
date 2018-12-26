@@ -15,51 +15,40 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Resource.h">
+    <ClInclude Include="krt_lib_pch.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="krt_forge_pch.h">
+    <ClInclude Include="krt_ray.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="krt_forge_app.h">
+    <ClInclude Include="krt_color_rgb.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="krt_render_thread.h">
+    <ClInclude Include="krt_tools_macro.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="krt_render_canvas.h">
+    <ClInclude Include="krt_shade_helper.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="krt_custom_events.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="krt_render_pixel.h">
+    <ClInclude Include="krt_material.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="krt_forge_pch.cpp">
+    <ClCompile Include="krt_ray.cc">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="krt_forge_app.cc">
+    <ClCompile Include="krt_lib_pch.cc">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="krt_render_canvas.cc">
+    <ClCompile Include="krt_color_rgb.cc">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="krt_render_thread.cc">
+    <ClCompile Include="krt_shade_helper.cc">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="krt_render_pixel.cc">
+    <ClCompile Include="krt_material.cc">
       <Filter>源文件</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="small.ico">
-      <Filter>资源文件</Filter>
-    </Image>
-    <Image Include="KRTForge.ico">
-      <Filter>资源文件</Filter>
-    </Image>
   </ItemGroup>
 </Project>

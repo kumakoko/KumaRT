@@ -35,81 +35,81 @@ class RenderThread;
 class RenderCanvas : public wxScrolledWindow
 {
 public:
-	RenderCanvas(wxWindow *parent);
-	virtual ~RenderCanvas(void);
+    RenderCanvas(wxWindow *parent);
+    virtual ~RenderCanvas(void);
 
-	void SetImage(wxImage& image);
-	wxImage GetImage(void);
+    void SetImage(wxImage& image);
+    wxImage GetImage(void);
 
-	virtual void OnDraw(wxDC& dc);
+    virtual void OnDraw(wxDC& dc);
 
-	//************************************
-	// Method:    StartRendering
-	// FullName:  RenderCanvas::StartRendering
-	// Access:    public 
-	// Returns:   void
-	// Qualifier:
-	// Parameter: void
-	//************************************
-	void StartRendering(void);
+    //************************************
+    // Method:    StartRendering
+    // FullName:  RenderCanvas::StartRendering
+    // Access:    public 
+    // Returns:   void
+    // Qualifier:
+    // Parameter: void
+    //************************************
+    void StartRendering(void);
 
 
-	/****************************************      
-	*  PauseRendering 
-	*  @return  void
-	*  @see   
-	*  @note
-	****************************************/
-	void PauseRendering();
+    /****************************************      
+    *  PauseRendering 
+    *  @return  void
+    *  @see   
+    *  @note
+    ****************************************/
+    void PauseRendering();
 
-	/****************************************      
-	*  ResumeRendering 
-	*  @return  void
-	*  @see   
-	*  @note 恢复挂起的渲染操作，继续渲染
-	****************************************/
-	void ResumeRendering();
+    /****************************************      
+    *  ResumeRendering 
+    *  @return  void
+    *  @see   
+    *  @note 恢复挂起的渲染操作，继续渲染
+    ****************************************/
+    void ResumeRendering();
 
-	/****************************************      
-	*  OnRenderCompleted 
-	*  @param   wxCommandEvent & event 
-	*  @return  void
-	*  @see   
-	*  @note  响应渲染完毕的处理函数
-	****************************************/
-	void OnRenderCompleted(wxCommandEvent& event);
+    /****************************************      
+    *  OnRenderCompleted 
+    *  @param   wxCommandEvent & event 
+    *  @return  void
+    *  @see   
+    *  @note  响应渲染完毕的处理函数
+    ****************************************/
+    void OnRenderCompleted(wxCommandEvent& event);
 
-	/****************************************      
-	*  OnTimerUpdate 
-	*  @param   wxTimerEvent & event 
-	*  @return  void
-	*  @see   
-	*  @note 响应定时器发送过来消息的处理函数
-	****************************************/
-	void OnTimerUpdate(wxTimerEvent& event);
+    /****************************************      
+    *  OnTimerUpdate 
+    *  @param   wxTimerEvent & event 
+    *  @return  void
+    *  @see   
+    *  @note 响应定时器发送过来消息的处理函数
+    ****************************************/
+    void OnTimerUpdate(wxTimerEvent& event);
 
-	/****************************************      
-	*  OnNewPixel 
-	*  @param   wxCommandEvent & event 
-	*  @return  void
-	*  @see   
-	*  @note 当没生成一个新的像素点时，渲染引擎发送消息过来，针对此信息刷新处理
-	****************************************/
-	void OnNewPixel(wxCommandEvent& event);
+    /****************************************      
+    *  OnNewPixel 
+    *  @param   wxCommandEvent & event 
+    *  @return  void
+    *  @see   
+    *  @note 当没生成一个新的像素点时，渲染引擎发送消息过来，针对此信息刷新处理
+    ****************************************/
+    void OnNewPixel(wxCommandEvent& event);
 
 protected:
-	wxBitmap *m_image;
-	//	World* w;
+    wxBitmap *m_image;
+    //  World* w;
 
 private:
-	RenderThread* thread;
-	wxStopWatch* timer;
+    RenderThread* thread;
+    wxStopWatch* timer;
 
-	long rendered_pixel_count_;
-	long pixelsToRender;
-	wxTimer updateTimer;
+    long rendered_pixel_count_;
+    long pixelsToRender;
+    wxTimer updateTimer;
 
-	DECLARE_EVENT_TABLE()
+    DECLARE_EVENT_TABLE()
 };
 #endif // krt_render_canvas_h__
 

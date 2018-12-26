@@ -15,22 +15,36 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER I
 ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **************************************************************************************************************************/
 /*!
- * \file krt_tools_macro.h
- * \date 2018/12/25 11:11
+ * \file krt_ray.h
+ * \date 2018/12/26 13:35
  *
- * \author Xiong Xinke
- * Contact: sun_of_lover@sina.com
+ * \author Administrator
+ * Contact: user@company.com
  *
  * \brief 
  *
- * TODO: 本文件定义了一系列工具宏
+ * TODO: long description
  *
  * \note
 */
-#ifndef krt_tools_macro_h__
-#define krt_tools_macro_h__
+#ifndef krt_ray_h__
+#define krt_ray_h__
 
-#define KRT_SAFE_DELETE(pointer) do{if(pointer!=nullptr){delete pointer; pointer = nullptr; }}while(0)
-#define KRT_SAFE_DELETE_ARRAY(array_pointer) do{if(array_pointer!=nullptr){delete [] array_pointer; array_pointer = nullptr; }}while(0)
+namespace krt
+{
+	class Ray 
+	{
+	public:
+		glm::dvec3	origin_;  	// 起点坐标 
+		glm::dvec3	dir_; 		// 射线的发射方向 
+		Ray();
+		Ray(const glm::dvec3& o, const glm::dvec3& d);
+		Ray(const Ray& ray);
+		Ray& operator= (const Ray& rhs);
+		~Ray(void);
+	};
+}
 
-#endif // krt_tools_macro_h__
+#endif // krt_ray_h__
+
+

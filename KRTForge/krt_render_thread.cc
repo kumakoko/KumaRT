@@ -24,60 +24,60 @@ ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALI
 void RenderThread::setPixel(int x, int y, int red, int green, int blue)
 {
 
-	pixels.push_back(new RenderPixel(x, y, red, green, blue));
+    pixels.push_back(new RenderPixel(x, y, red, green, blue));
 
-	if (timer->Time() - lastUpdateTime > 40)
-		NotifyCanvas();
+    if (timer->Time() - lastUpdateTime > 40)
+        NotifyCanvas();
 
-	TestDestroy();
+    TestDestroy();
 }
 
 void RenderThread::NotifyCanvas()
 {
-	lastUpdateTime = timer->Time();
+    lastUpdateTime = timer->Time();
 
-	//copy rendered pixels into a new vector and reset
-	auto pixelsUpdate = new std::vector<RenderPixel*>(pixels);
-	pixels.clear();
+    //copy rendered pixels into a new vector and reset
+    auto pixelsUpdate = new std::vector<RenderPixel*>(pixels);
+    pixels.clear();
 
-	wxCommandEvent e(wxEVT_RENDER, ID_RENDER_NEWPIXEL);
+    wxCommandEvent e(wxEVT_RENDER, ID_RENDER_NEWPIXEL);
 
-	// 在work线程中往主线程传递数据时，使用SetClientData函数，在work线程中，new出数据
-	// 在主线程中，delete这些数据。
-	e.SetClientData(pixelsUpdate);
+    // 在work线程中往主线程传递数据时，使用SetClientData函数，在work线程中，new出数据
+    // 在主线程中，delete这些数据。
+    e.SetClientData(pixelsUpdate);
 
-	/*
-	Post an event to be processed later.
-	
-	This function is similar to QueueEvent() but can't be used to post events from worker threads for the event objects with
-	wxString fields (i.e. in practice most of them) because of an unsafe use of the same wxString object which happens because
-	the wxString field in the original event object and its copy made internally by this function share the same string buffer 
-	internally. Use QueueEvent() to avoid this.
-	
-	A copy of event is made by the function, so the original can be deleted as soon as function returns (it is common that the 
-	original is created on the stack). This requires that the wxEvent::Clone() method be implemented by event so that it can be 
-	duplicated and stored until it gets processed.
-	*/
-	canvas->GetEventHandler()->AddPendingEvent(e);
+    /*
+    Post an event to be processed later.
+    
+    This function is similar to QueueEvent() but can't be used to post events from worker threads for the event objects with
+    wxString fields (i.e. in practice most of them) because of an unsafe use of the same wxString object which happens because
+    the wxString field in the original event object and its copy made internally by this function share the same string buffer 
+    internally. Use QueueEvent() to avoid this.
+    
+    A copy of event is made by the function, so the original can be deleted as soon as function returns (it is common that the 
+    original is created on the stack). This requires that the wxEvent::Clone() method be implemented by event so that it can be 
+    duplicated and stored until it gets processed.
+    */
+    canvas->GetEventHandler()->AddPendingEvent(e);
 }
 
 void RenderThread::OnExit()
 {
-	NotifyCanvas();
+    NotifyCanvas();
 
-	// work线程结束了，发送一个“渲染结束”的自定义事件到主线程
-	wxCommandEvent e(wxEVT_RENDER, ID_RENDER_COMPLETED); 
-	canvas->GetEventHandler()->AddPendingEvent(e);
-	canvas->GetParent()->GetEventHandler()->AddPendingEvent(e);
+    // work线程结束了，发送一个“渲染结束”的自定义事件到主线程
+    wxCommandEvent e(wxEVT_RENDER, ID_RENDER_COMPLETED); 
+    canvas->GetEventHandler()->AddPendingEvent(e);
+    canvas->GetParent()->GetEventHandler()->AddPendingEvent(e);
 }
 
 void *RenderThread::Entry()
 {
-	lastUpdateTime = 0;
-	timer = new wxStopWatch();
+    lastUpdateTime = 0;
+    timer = new wxStopWatch();
 
-	//world->render_scene(); //for bare bones ray tracer only
-//	world->camera_ptr->render_scene(*world);
+    //world->render_scene(); //for bare bones ray tracer only
+//  world->camera_ptr->render_scene(*world);
 
-	return nullptr;
+    return nullptr;
 }

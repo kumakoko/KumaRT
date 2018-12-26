@@ -1,4 +1,4 @@
-ï»¿/**************************************************************************************************************************
+/**************************************************************************************************************************
 Copyright(C) 2014-2019 www.xionggf.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
@@ -15,41 +15,27 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER I
 ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **************************************************************************************************************************/
 /*!
- * \file krt_render_thread.h
- * \date 2018/12/25 10:29
+ * \file krt_shade_helper.h
+ * \date 2018/12/26 17:19
  *
- * \author xiong xinke
+ * \author Xiong Xinke
  * Contact: sun_of_lover@sina.com
  *
  * \brief 
  *
- * TODO: ç”¨æ¥æ‰§è¡Œæ¸²æŸ“è®¡ç®—çš„åå°çº¿ç¨‹
+ * TODO: ´æ´¢¹âÏß¸ú×ÙÆ÷ËùĞèµÄĞÅÏ¢£¬²¢ÇÒ¶Ô¹âÏß-ÎïÌåÏà½»µã½øĞĞ×ÅÉ«²Ù×÷
  *
  * \note
 */
-#ifndef krt_render_thread_h__
-#define krt_render_thread_h__
+#ifndef krt_shade_helper_h__
+#define krt_shade_helper_h__
 
-class RenderCanvas;
-class RenderPixel;
-
-class RenderThread : public wxThread
+class ShadeHelper
 {
 public:
-    RenderThread(RenderCanvas* c/*, World* w*/) : wxThread(), /*world(w), */canvas(c) {}
-    virtual void *Entry();
-    virtual void OnExit();
-    virtual void setPixel(int x, int y, int red, int green, int blue);
-
-private:
-    void NotifyCanvas();
-
-    //World* world;
-    RenderCanvas* canvas;
-
-    std::vector<RenderPixel*> pixels;
-    wxStopWatch* timer;
-    long lastUpdateTime;
+	ShadeHelper();
+	~ShadeHelper();
 };
 
-#endif // krt_render_thread_h__
+#endif // krt_shade_helper_h__
+

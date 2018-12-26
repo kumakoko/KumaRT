@@ -18,34 +18,53 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="krt_color_rgb.h" />
+    <ClInclude Include="krt_lib_pch.h" />
+    <ClInclude Include="krt_material.h" />
+    <ClInclude Include="krt_ray.h" />
+    <ClInclude Include="krt_shade_helper.h" />
+    <ClInclude Include="krt_tools_macro.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="krt_color_rgb.cc" />
+    <ClCompile Include="krt_lib_pch.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="krt_material.cc" />
+    <ClCompile Include="krt_ray.cc" />
+    <ClCompile Include="krt_shade_helper.cc" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{D107006E-F4C2-48BC-850B-490EAC284DFE}</ProjectGuid>
+    <ProjectGuid>{D3295BB3-9702-4C36-A4D3-AD50C20A7299}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>KRTForge</RootNamespace>
+    <RootNamespace>LibKRT</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -73,15 +92,12 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>..\published\</OutDir>
-    <TargetName>$(ProjectName)_d</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>..\published\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -92,16 +108,14 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;__WXMSW__;WXUSINGDLL;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeaderFile>krt_forge_pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(WXWIDGETS_HEADER);$(WXWIDGETS_HEADER)/msvc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(GLM_HEADER)</AdditionalIncludeDirectories>
+      <PrecompiledHeaderFile>krt_lib_pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>wxjpegd.lib;wxexpatd.lib;wxzlibd.lib;wxtiffd.lib;wxpngd.lib;wxregexud.lib;wxscintillad.lib;wxbase31ud.lib;wxbase31ud_net.lib;wxbase31ud_xml.lib;wxmsw31ud_adv.lib;wxmsw31ud_aui.lib;wxmsw31ud_core.lib;wxmsw31ud_gl.lib;wxmsw31ud_html.lib;wxmsw31ud_media.lib;wxmsw31ud_propgrid.lib;wxmsw31ud_qa.lib;wxmsw31ud_ribbon.lib;wxmsw31ud_richtext.lib;wxmsw31ud_stc.lib;wxmsw31ud_webview.lib;wxmsw31ud_xrc.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(WXWIDGETS_LIB_X86)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -110,7 +124,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -126,18 +140,16 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;NDEBUG;WXUSINGDLL;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeaderFile>krt_forge_pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(WXWIDGETS_HEADER);$(WXWIDGETS_HEADER)/msvc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(GLM_HEADER)</AdditionalIncludeDirectories>
+      <PrecompiledHeaderFile>krt_lib_pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>wxexpat.lib;wxjpeg.lib;wxpng.lib;wxregexu.lib;wxscintilla.lib;wxtiff.lib;wxzlib.lib;wxbase31u.lib;wxbase31u_net.lib;wxbase31u_xml.lib;wxmsw31u_adv.lib;wxmsw31u_aui.lib;wxmsw31u_core.lib;wxmsw31u_gl.lib;wxmsw31u_html.lib;wxmsw31u_media.lib;wxmsw31u_propgrid.lib;wxmsw31u_qa.lib;wxmsw31u_ribbon.lib;wxmsw31u_richtext.lib;wxmsw31u_stc.lib;wxmsw31u_webview.lib;wxmsw31u_xrc.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(WXWIDGETS_LIB_X86)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -148,7 +160,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -158,31 +170,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="krt_custom_events.h" />
-    <ClInclude Include="krt_forge_app.h" />
-    <ClInclude Include="krt_render_canvas.h" />
-    <ClInclude Include="krt_render_pixel.h" />
-    <ClInclude Include="krt_render_thread.h" />
-    <ClInclude Include="Resource.h" />
-    <ClInclude Include="krt_forge_pch.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="krt_forge_app.cc" />
-    <ClCompile Include="krt_forge_pch.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="krt_render_canvas.cc" />
-    <ClCompile Include="krt_render_pixel.cc" />
-    <ClCompile Include="krt_render_thread.cc" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="KRTForge.ico" />
-    <Image Include="small.ico" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
