@@ -15,28 +15,56 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER I
 ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **************************************************************************************************************************/
 /*!
- * \file krt_tools_macro.h
- * \date 2018/12/25 11:11
+ * \file krt_bounding_box.h
+ * \date 2019/01/05 17:38
  *
  * \author Xiong Xinke
  * Contact: sun_of_lover@sina.com
  *
  * \brief 
  *
- * TODO: 本文件定义了一系列工具宏
+ * TODO: 包围盒
  *
  * \note
 */
-#ifndef krt_tools_macro_h__
-#define krt_tools_macro_h__
+namespace krt
+{
+	class Ray;
 
-#define KRT_SAFE_DELETE(pointer) do{if(pointer!=nullptr){delete pointer; pointer = nullptr; }}while(0)
-#define KRT_SAFE_DELETE_ARRAY(array_pointer) do{if(array_pointer!=nullptr){delete [] array_pointer; array_pointer = nullptr; }}while(0)
+	class BoundingBox 
+	{
+	public:
+		
+		double x0_, x1_, y0_, y1_, z0_, z1_; // 包围盒的左下角和右上角的坐标值
 
-#if defined(WIN32) || defined(_WIN32)
-#define KRT_INLINE __forceinline
-#else
-#define KRT_INLINE inline
-#endif
+		BoundingBox();
 
-#endif // krt_tools_macro_h__
+		BoundingBox(const double x0, const double x1,const double y0, const double y1,const double z0, const double z1);
+
+		BoundingBox(const glm::vec3& p0, const glm::vec3& p1);
+
+		BoundingBox(const BoundingBox& bbox);
+
+		BoundingBox& operator= (const BoundingBox& rhs);
+
+		~BoundingBox();
+
+		/****************************************      
+		*  Hit 
+		*  @param   const Ray & ray 
+		*  @return  bool 判断射线ray是否和本盒相交，是的话返回true，否返回false
+		*  @see   
+		*  @note 判断射线ray是否和本盒相交
+		****************************************/
+		bool Hit(const Ray& ray) const;
+
+		/****************************************      
+		*  Inside 
+		*  @param   const glm::vec3 & p 
+		*  @return  bool 判断某点p是否在本盒内，是的话返回true，否返回false
+		*  @see   
+		*  @note 判断某点p是否在本盒内
+		****************************************/
+		bool Inside(const glm::vec3& p) const;
+	};
+}

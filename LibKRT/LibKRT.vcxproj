@@ -19,7 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="krt_bounding_box.h" />
     <ClInclude Include="krt_color_rgb.h" />
+    <ClInclude Include="krt_geometry_object.h" />
     <ClInclude Include="krt_lib_pch.h" />
     <ClInclude Include="krt_material.h" />
     <ClInclude Include="krt_ray.h" />
@@ -27,7 +29,9 @@
     <ClInclude Include="krt_tools_macro.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="krt_bounding_box.cc" />
     <ClCompile Include="krt_color_rgb.cc" />
+    <ClCompile Include="krt_geometry_object.cc" />
     <ClCompile Include="krt_lib_pch.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

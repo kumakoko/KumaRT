@@ -1,4 +1,4 @@
-/**************************************************************************************************************************
+Ôªø/**************************************************************************************************************************
 Copyright(C) 2014-2019 www.xionggf.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
@@ -23,7 +23,7 @@ ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALI
  *
  * \brief
  *
- * TODO: long description
+ * TODO: È¢úËâ≤Á±ª
  *
  * \note
 */
@@ -34,87 +34,87 @@ ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALI
 
 namespace krt
 {
-	class RGBColor 
-	{
-	public:
-		float	red_, green_, blue_;
-	public:
-		RGBColor();										// default constructor
-		RGBColor(float c);									// constructor
-		RGBColor(float r, float g, float b);				// constructor
-		RGBColor(const RGBColor& c); 						// copy constructor
-		~RGBColor();									// destructor
+    class RGBColor 
+    {
+    public:
+        float   red_, green_, blue_;
+    public:
+        RGBColor();                                     // default constructor
+        RGBColor(float c);                                  // constructor
+        RGBColor(float r, float g, float b);                // constructor
+        RGBColor(const RGBColor& c);                        // copy constructor
+        ~RGBColor();                                    // destructor
 
-		RGBColor& operator= (const RGBColor& rhs);
+        RGBColor& operator= (const RGBColor& rhs);
 
-		KRT_INLINE RGBColor operator+ (const RGBColor& c) const
-		{
-			return (RGBColor(red_ + c.red_, green_ + c.green_, blue_ + c.blue_));
-		}
-			
-		KRT_INLINE RGBColor& operator+= (const RGBColor& c)
-		{
-			red_ += c.red_; green_ += c.green_; blue_ += c.blue_;
-			return (*this);
-		}
+        KRT_INLINE RGBColor operator+ (const RGBColor& c) const
+        {
+            return (RGBColor(red_ + c.red_, green_ + c.green_, blue_ + c.blue_));
+        }
+            
+        KRT_INLINE RGBColor& operator+= (const RGBColor& c)
+        {
+            red_ += c.red_; green_ += c.green_; blue_ += c.blue_;
+            return (*this);
+        }
 
-		KRT_INLINE RGBColor operator* (const float a) const
-		{
-			return (RGBColor(red_ * a, green_ * a, blue_ * a));
-		}
+        KRT_INLINE RGBColor operator* (const float a) const
+        {
+            return (RGBColor(red_ * a, green_ * a, blue_ * a));
+        }
 
-		KRT_INLINE RGBColor& operator*= (const float a)
-		{
-			red_ *= a; green_ *= a; blue_ *= a;
-			return (*this);
-		}
+        KRT_INLINE RGBColor& operator*= (const float a)
+        {
+            red_ *= a; green_ *= a; blue_ *= a;
+            return (*this);
+        }
 
-		KRT_INLINE RGBColor operator/ (const float a) const
-		{
-			return (RGBColor(red_ / a, green_ / a, blue_ / a));
-		}
+        KRT_INLINE RGBColor operator/ (const float a) const
+        {
+            return (RGBColor(red_ / a, green_ / a, blue_ / a));
+        }
 
-		KRT_INLINE RGBColor& operator/= (const float a)
-		{
-			red_ /= a; green_ /= a; blue_ /= a;
-			return (*this);
-		}
+        KRT_INLINE RGBColor& operator/= (const float a)
+        {
+            red_ /= a; green_ /= a; blue_ /= a;
+            return (*this);
+        }
 
-		KRT_INLINE RGBColor operator* (const RGBColor& c) const
-		{
-			return (RGBColor(red_ * c.red_, green_ * c.green_, blue_ * c.blue_));
-		}
+        KRT_INLINE RGBColor operator* (const RGBColor& c) const
+        {
+            return (RGBColor(red_ * c.red_, green_ * c.green_, blue_ * c.blue_));
+        }
 
-		KRT_INLINE bool operator== (const RGBColor& c) const
-		{
-			return (red_ == c.red_ && green_ == c.green_ && blue_ == c.blue_);
-		}
-			
-		/****************************************      
-		*  Average 
-		*  @return  KRT_INLINE float
-		*  @see   
-		*  @note Ω´∏˜—’…´∑÷¡øœ‡º”∫Û≥˝“‘3£¨∑µªÿ
-		****************************************/
-		KRT_INLINE float Average() const
-		{
-			return (red_ + green_ + blue_) / 3.0f;
-		}
+        KRT_INLINE bool operator== (const RGBColor& c) const
+        {
+            return (red_ == c.red_ && green_ == c.green_ && blue_ == c.blue_);
+        }
+            
+        /****************************************      
+        *  Average 
+        *  @return  KRT_INLINE float
+        *  @see   
+        *  @note Â∞ÜÂêÑÈ¢úËâ≤ÂàÜÈáèÁõ∏Âä†ÂêéÈô§‰ª•3ÔºåËøîÂõû
+        ****************************************/
+        KRT_INLINE float Average() const
+        {
+            return (red_ + green_ + blue_) / 3.0f;
+        }
 
-		/****************************************      
-		*  Powc 
-		*  @param   float p 
-		*  @return  krt::RGBColor
-		*  @see   
-		*  @note Ω´∏˜—’…´∑÷¡øΩ¯––“ª¥Œ√›‘ÀÀ„≤Ÿ◊˜£¨÷∏ ˝Œ™p
-		****************************************/
-		RGBColor Powc(float p) const;
-	};
+        /****************************************      
+        *  Powc 
+        *  @param   float p 
+        *  @return  krt::RGBColor
+        *  @see   
+        *  @note Â∞ÜÂêÑÈ¢úËâ≤ÂàÜÈáèËøõË°å‰∏ÄÊ¨°ÂπÇËøêÁÆóÊìç‰ΩúÔºåÊåáÊï∞‰∏∫p
+        ****************************************/
+        RGBColor Powc(float p) const;
+    };
 
-	KRT_INLINE RGBColor operator* (const float a, const RGBColor& c)
-	{
-		return (RGBColor(a * c.red_, a * c.green_, a * c.blue_));
-	}
+    KRT_INLINE RGBColor operator* (const float a, const RGBColor& c)
+    {
+        return (RGBColor(a * c.red_, a * c.green_, a * c.blue_));
+    }
 }
 
 #endif // krt_color_rgb_h__

@@ -1,4 +1,4 @@
-/**************************************************************************************************************************
+ï»¿/**************************************************************************************************************************
 Copyright(C) 2014-2019 www.xionggf.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
@@ -23,19 +23,22 @@ ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALI
  *
  * \brief 
  *
- * TODO: ´æ´¢¹âÏß¸ú×ÙÆ÷ËùĞèµÄĞÅÏ¢£¬²¢ÇÒ¶Ô¹âÏß-ÎïÌåÏà½»µã½øĞĞ×ÅÉ«²Ù×÷
+ * TODO: å­˜å‚¨å…‰çº¿è·Ÿè¸ªå™¨æ‰€éœ€çš„ä¿¡æ¯ï¼Œå¹¶ä¸”å¯¹å…‰çº¿-ç‰©ä½“ç›¸äº¤ç‚¹è¿›è¡Œç€è‰²æ“ä½œ
  *
  * \note
 */
 #ifndef krt_shade_helper_h__
 #define krt_shade_helper_h__
 
-class ShadeHelper
+namespace krt
 {
-public:
-	ShadeHelper();
-	~ShadeHelper();
-};
+	class ShadeHelper
+	{
+	public:
+		ShadeHelper();
+		~ShadeHelper();
+	};
+}
 
 #endif // krt_shade_helper_h__
 

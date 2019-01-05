@@ -33,6 +33,12 @@
     <ClInclude Include="krt_material.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="krt_geometry_object.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="krt_bounding_box.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="krt_ray.cc">
@@ -48,6 +54,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="krt_material.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="krt_geometry_object.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="krt_bounding_box.cc">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

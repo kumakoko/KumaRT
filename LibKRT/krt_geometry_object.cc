@@ -14,45 +14,76 @@ WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEM
 COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **************************************************************************************************************************/
-
 #include "krt_lib_pch.h"
-#include "krt_color_rgb.h"
+#include "krt_material.h"
+#include "krt_bounding_box.h"
+#include "krt_geometry_object.h"
 
 namespace krt
 {
-	RGBColor::RGBColor(): red_(0.0), green_(0.0), blue_(0.0)
+	GeometricObject::GeometricObject(): color(0.0f,0.0f,0.0f),
+		                                material_(nullptr),
+		                                shadows(true)
 	{
 	}
 
-	RGBColor::RGBColor(float c): red_(c), green_(c), blue_(c)
+	GeometricObject::GeometricObject(const GeometricObject& object): color(object.color),
+		                                                             shadows(object.shadows)
 	{
+		this->material_ = object.material_;
 	}
 
-	RGBColor::RGBColor(float r, float g, float b): red_(r), green_(g), blue_(b)
-	{
-	}
-
-	RGBColor::RGBColor(const RGBColor& c): red_(c.red_), green_(c.green_), blue_(c.blue_)
-	{
-	}
-
-	RGBColor::~RGBColor()
-	{
-	}
-
-	RGBColor& RGBColor::operator= (const RGBColor& rhs)
+	GeometricObject& GeometricObject::operator= (const GeometricObject& rhs) 
 	{
 		if (this == &rhs)
 			return (*this);
 
-		red_ = rhs.red_; green_ = rhs.green_; blue_ = rhs.blue_;
-
-		return (*this);
+		color = rhs.color;
+		material_.reset();
+		material_ = rhs.material_;
+		shadows = rhs.shadows;
+		return *this;
 	}
 
-	RGBColor RGBColor::Powc(float p) const
+	GeometricObject::~GeometricObject()
 	{
-		return (RGBColor(powf(red_, p), powf(green_, p), powf(blue_, p)));
+		material_.reset();
 	}
 
+	void GeometricObject::add_object(GeometricObject* object_ptr)
+	{
+	}
+
+	glm::vec3 GeometricObject::get_normal() const
+	{
+		return glm::vec3(0.0f);
+	}
+
+	void GeometricObject::set_material(MaterialSPtr mPtr)
+	{
+		material_ = mPtr;
+	}
+
+	glm::vec3 GeometricObject::get_normal(const glm::vec3& p) {
+		return glm::vec3(0.0f);
+	}
+
+	void GeometricObject::set_bounding_box() 
+	{
+	}
+
+	BoundingBox GeometricObject::get_bounding_box()
+	{
+		return BoundingBox();
+	}
+
+	glm::vec3 GeometricObject::sample()
+	{
+		return glm::vec3(0.0f);
+	}
+
+	float GeometricObject::PDF(ShadeHelper& sr)
+	{
+		return 0.0f;
+	}
 }

@@ -1,4 +1,4 @@
-/**************************************************************************************************************************
+ï»¿/**************************************************************************************************************************
 Copyright(C) 2014-2019 www.xionggf.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
@@ -23,9 +23,9 @@ ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALI
  *
  * \brief 
  *
- * TODO: long description
+ * TODO: å°„çº¿ç±»
  *
- * \note
+ * \note 
 */
 #ifndef krt_ray_h__
 #define krt_ray_h__
@@ -35,13 +35,13 @@ namespace krt
 	class Ray 
 	{
 	public:
-		glm::dvec3	origin_;  	// Æğµã×ø±ê 
-		glm::dvec3	dir_; 		// ÉäÏßµÄ·¢Éä·½Ïò 
+		glm::dvec3	origin_;  	// èµ·ç‚¹åæ ‡ 
+		glm::dvec3	dir_; 		// å°„çº¿çš„å‘å°„æ–¹å‘ 
 		Ray();
 		Ray(const glm::dvec3& o, const glm::dvec3& d);
 		Ray(const Ray& ray);
 		Ray& operator= (const Ray& rhs);
-		~Ray(void);
+		~Ray();
 	};
 }
 

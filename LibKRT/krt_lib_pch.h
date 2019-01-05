@@ -46,6 +46,7 @@ ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALI
 #include <set>
 #include <array>
 #include <cstdlib>
+#include <cfloat>
 
 #ifndef  GLM_FORCE_SSE2
 #define  GLM_FORCE_SSE2

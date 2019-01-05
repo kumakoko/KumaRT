@@ -1,4 +1,4 @@
-/**************************************************************************************************************************
+﻿/**************************************************************************************************************************
 Copyright(C) 2014-2019 www.xionggf.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
@@ -32,12 +32,25 @@ ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALI
 
 namespace krt
 {
+	class ShadeHelper;
+	class RGBColor;
+
 	class Material
 	{
 	public:
 		Material();
-		~Material();
+
+		Material(const Material& material);
+
+		virtual ~Material();
+
+		virtual RGBColor shade(ShadeHelper& sr);
+
+	protected:
+		Material& operator= (const Material& rhs);
 	};
+
+	typedef std::shared_ptr<Material> MaterialSPtr;
 }
 
 #endif // krt_material_h__
