@@ -18,8 +18,8 @@ ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALI
  * \file krt_color_rgb.h
  * \date 2018/12/26 16:34
  *
- * \author Administrator
- * Contact: user@company.com
+ * \author www.xionggf.com
+ * Contact: sun_of_lover@sina.com
  *
  * \brief
  *

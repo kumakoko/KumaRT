@@ -39,6 +39,30 @@
     <ClInclude Include="krt_bounding_box.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="krt_object.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="krt_light_source.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="krt_intersection.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="krt_solid_object.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="krt_optics.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="krt_substance_refraction.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="krt_math.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="krt_sphere.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="krt_ray.cc">
@@ -60,6 +84,27 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="krt_bounding_box.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="krt_object.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="krt_light_source.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="krt_intersection.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="krt_solid_object.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="krt_optics.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="krt_substance_refraction.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="krt_sphere.cc">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

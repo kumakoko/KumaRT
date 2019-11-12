@@ -18,7 +18,7 @@ ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALI
  * \file krt_geometry_object.h
  * \date 2019/01/05 16:53
  *
- * \author Xiong Xinke
+ * \author www.xionggf.com
  * Contact: sun_of_lover@sina.com
  *
  * \brief

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -19,58 +19,73 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="krt_math.h" />
+    <ClInclude Include="krt_optics.h" />
+    <ClInclude Include="krt_solid_object.h" />
     <ClInclude Include="krt_bounding_box.h" />
     <ClInclude Include="krt_color_rgb.h" />
     <ClInclude Include="krt_geometry_object.h" />
+    <ClInclude Include="krt_intersection.h" />
     <ClInclude Include="krt_lib_pch.h" />
+    <ClInclude Include="krt_light_source.h" />
     <ClInclude Include="krt_material.h" />
+    <ClInclude Include="krt_object.h" />
     <ClInclude Include="krt_ray.h" />
     <ClInclude Include="krt_shade_helper.h" />
+    <ClInclude Include="krt_sphere.h" />
+    <ClInclude Include="krt_substance_refraction.h" />
     <ClInclude Include="krt_tools_macro.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="krt_optics.cc" />
+    <ClCompile Include="krt_solid_object.cc" />
     <ClCompile Include="krt_bounding_box.cc" />
     <ClCompile Include="krt_color_rgb.cc" />
     <ClCompile Include="krt_geometry_object.cc" />
+    <ClCompile Include="krt_intersection.cc" />
     <ClCompile Include="krt_lib_pch.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="krt_light_source.cc" />
     <ClCompile Include="krt_material.cc" />
+    <ClCompile Include="krt_object.cc" />
     <ClCompile Include="krt_ray.cc" />
     <ClCompile Include="krt_shade_helper.cc" />
+    <ClCompile Include="krt_sphere.cc" />
+    <ClCompile Include="krt_substance_refraction.cc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{D3295BB3-9702-4C36-A4D3-AD50C20A7299}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>LibKRT</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -112,9 +127,9 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;GLM_FORCE_MESSAGES;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(GLM_HEADER)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(GLM_HEADER);</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>krt_lib_pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
@@ -130,6 +145,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(GLM_HEARDER);$(WXWIDGETS_HEARDER)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -166,6 +182,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(GLM_HEARDER);$(WXWIDGETS_HEARDER)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

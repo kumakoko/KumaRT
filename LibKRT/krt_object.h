@@ -15,28 +15,38 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER I
 ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **************************************************************************************************************************/
 /*!
- * \file krt_tools_macro.h
- * \date 2018/12/25 11:11
+ * \file krt_object.h
+ * \date 2019/11/11 15:49
  *
  * \author www.xionggf.com
  * Contact: sun_of_lover@sina.com
  *
  * \brief 
  *
- * TODO: 本文件定义了一系列工具宏
+ * TODO: 定义了作为KRT框架中各个对象的统一基类。这个基类包含了以下的信息：
+ *       1 名称信息，即每个KRT内的object，都应有一个Name属性，用来标识该对象的名称
  *
  * \note
 */
-#ifndef krt_tools_macro_h__
-#define krt_tools_macro_h__
+#ifndef krt_object_h__
+#define krt_object_h__
 
-#define KRT_SAFE_DELETE(pointer) do{if(pointer!=nullptr){delete pointer; pointer = nullptr; }}while(0)
-#define KRT_SAFE_DELETE_ARRAY(array_pointer) do{if(array_pointer!=nullptr){delete [] array_pointer; array_pointer = nullptr; }}while(0)
+namespace krt
+{
+    class Object
+    {
+    private:
+        std::string name_;
+    public:
+        Object();
+        Object(const char* name);
+        Object(const std::string& name);
+        virtual ~Object();
+        void SetName(const char* name);
+        void SetName(const std::string& name);
+        const std::string& GetName() const;
+    };
+}
 
-#if defined(WIN32) || defined(_WIN32)
-#define KRT_INLINE __forceinline
-#else
-#define KRT_INLINE inline
-#endif
 
-#endif // krt_tools_macro_h__
+#endif // krt_object_h__

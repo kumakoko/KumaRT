@@ -14,29 +14,40 @@ WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEM
 COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **************************************************************************************************************************/
-/*!
- * \file krt_tools_macro.h
- * \date 2018/12/25 11:11
- *
- * \author www.xionggf.com
- * Contact: sun_of_lover@sina.com
- *
- * \brief 
- *
- * TODO: 本文件定义了一系列工具宏
- *
- * \note
-*/
-#ifndef krt_tools_macro_h__
-#define krt_tools_macro_h__
 
-#define KRT_SAFE_DELETE(pointer) do{if(pointer!=nullptr){delete pointer; pointer = nullptr; }}while(0)
-#define KRT_SAFE_DELETE_ARRAY(array_pointer) do{if(array_pointer!=nullptr){delete [] array_pointer; array_pointer = nullptr; }}while(0)
+#include "krt_lib_pch.h"
+#include "krt_object.h"
 
-#if defined(WIN32) || defined(_WIN32)
-#define KRT_INLINE __forceinline
-#else
-#define KRT_INLINE inline
-#endif
+namespace krt
+{
+    Object::Object()
+    {
+    }
 
-#endif // krt_tools_macro_h__
+    Object::Object(const char* name) : name_(name)
+    {
+    }
+
+    Object::Object(const std::string& name) :name_(name)
+    {
+    }
+
+    Object::~Object()
+    {
+    }
+
+    const std::string& Object::GetName() const
+    {
+        return name_;
+    }
+
+    void Object::SetName(const char* name)
+    {
+        name_ = name;
+    }
+
+    void Object::SetName(const std::string& name)
+    {
+        name_ = name;
+    }
+}

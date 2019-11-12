@@ -14,29 +14,27 @@ WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEM
 COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **************************************************************************************************************************/
-/*!
- * \file krt_tools_macro.h
- * \date 2018/12/25 11:11
- *
- * \author www.xionggf.com
- * Contact: sun_of_lover@sina.com
- *
- * \brief 
- *
- * TODO: 本文件定义了一系列工具宏
- *
- * \note
-*/
-#ifndef krt_tools_macro_h__
-#define krt_tools_macro_h__
+#include "krt_lib_pch.h"
+#include "krt_substance_refraction.h"
 
-#define KRT_SAFE_DELETE(pointer) do{if(pointer!=nullptr){delete pointer; pointer = nullptr; }}while(0)
-#define KRT_SAFE_DELETE_ARRAY(array_pointer) do{if(array_pointer!=nullptr){delete [] array_pointer; array_pointer = nullptr; }}while(0)
+namespace krt
+{
+    const double SubstanceRefraction::REFRACTION_VACUUM = 1.0000;
+    const double SubstanceRefraction::REFRACTION_AIR = 1.0003;
+    const double SubstanceRefraction::REFRACTION_ICE = 1.3100;
+    const double SubstanceRefraction::REFRACTION_WATER = 1.3330;
+    const double SubstanceRefraction::REFRACTION_GASOLINE = 1.3980;
+    const double SubstanceRefraction::REFRACTION_GLASS = 1.5500;
+    const double SubstanceRefraction::REFRACTION_SAPPHIRE = 1.7700;
+    const double SubstanceRefraction::REFRACTION_DIAMOND = 2.4190;
+    const double SubstanceRefraction::REFRACTION_MINIMUM = 1.0000;
+    const double SubstanceRefraction::REFRACTION_MAXIMUM = 9.0000;
 
-#if defined(WIN32) || defined(_WIN32)
-#define KRT_INLINE __forceinline
-#else
-#define KRT_INLINE inline
-#endif
-
-#endif // krt_tools_macro_h__
+    void SubstanceRefraction::ValidateRefraction(double refraction)
+    {
+        if (refraction < REFRACTION_MINIMUM || refraction > REFRACTION_MAXIMUM)
+        {
+           // throw ImagerException("Invalid refractive index.");
+        }
+    }
+}

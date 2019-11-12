@@ -1,4 +1,4 @@
-﻿/**************************************************************************************************************************
+/**************************************************************************************************************************
 Copyright(C) 2014-2019 www.xionggf.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
@@ -15,28 +15,45 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER I
 ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **************************************************************************************************************************/
 /*!
- * \file krt_tools_macro.h
- * \date 2018/12/25 11:11
+ * \file krt_sphere.h
+ * \date 2019/11/12 15:47
  *
  * \author www.xionggf.com
- * Contact: sun_of_lover@sina.com
+ * Contact: sun_of_lover
  *
  * \brief 
  *
- * TODO: 本文件定义了一系列工具宏
+ * TODO: long description
  *
  * \note
 */
-#ifndef krt_tools_macro_h__
-#define krt_tools_macro_h__
 
-#define KRT_SAFE_DELETE(pointer) do{if(pointer!=nullptr){delete pointer; pointer = nullptr; }}while(0)
-#define KRT_SAFE_DELETE_ARRAY(array_pointer) do{if(array_pointer!=nullptr){delete [] array_pointer; array_pointer = nullptr; }}while(0)
+#ifndef krt_sphere_h__
+#define krt_sphere_h__
 
-#if defined(WIN32) || defined(_WIN32)
-#define KRT_INLINE __forceinline
-#else
-#define KRT_INLINE inline
-#endif
+#include "krt_solid_object.h"
 
-#endif // krt_tools_macro_h__
+namespace krt
+{
+    // A sphere that is more efficient than Spheroid with equal dimensions.
+    class Sphere : public SolidObject
+    {
+    public:
+        Sphere(const glm::dvec3& _center, double _radius);
+
+        virtual void AppendAllIntersections(const glm::dvec3& vantage,const glm::dvec3& direction,IntersectionList& intersectionList) const override;
+
+        virtual bool Contains(const glm::dvec3& point) const override;
+
+        // The nice thing about a sphere is that rotating 
+        // it has no effect on its appearance!
+        virtual SolidObject& RotateX(double angleInDegrees) override;
+        virtual SolidObject& RotateY(double angleInDegrees) override;
+        virtual SolidObject& RotateZ(double angleInDegrees) override;
+
+    private:
+        double  radius;
+    };
+}
+
+#endif // krt_sphere_h__

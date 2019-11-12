@@ -18,7 +18,7 @@ ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALI
  * \file krt_material.h
  * \date 2018/12/26 17:29
  *
- * \author Xiong Xinke
+ * \author www.xionggf.com
  * Contact: sun_of_lover@sina.com
  *
  * \brief 

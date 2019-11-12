@@ -1,20 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros">
-    <WXWIDGETS_HEADER>../third-lib/wxWidgets-3.1.2/include</WXWIDGETS_HEADER>
-    <WXWIDGETS_LIB_X64>../third-lib/wx/wxMSW-3.1.2_vc141_x64_Dev/lib/vc141_x64_dll</WXWIDGETS_LIB_X64>
-    <WXWIDGETS_LIB_X86>../third-lib/wxWidgets-3.1.2/lib/vc_dll</WXWIDGETS_LIB_X86>
-    <GLM_HEADER>../third-lib/glm-0.9.9.3</GLM_HEADER>
+    <WXWIDGETS_HEADER>../third-lib/wxWidgets-3.1.3/include</WXWIDGETS_HEADER>
+    <WXWIDGETS_LIB_X86>../third-lib/wxWidgets-3.1.3/lib/vc_dll</WXWIDGETS_LIB_X86>
+    <GLM_HEADER>../third-lib/glm/0.9.9.5/include/glm</GLM_HEADER>
   </PropertyGroup>
   <PropertyGroup />
   <ItemDefinitionGroup />
   <ItemGroup>
     <BuildMacro Include="WXWIDGETS_HEADER">
       <Value>$(WXWIDGETS_HEADER)</Value>
-    </BuildMacro>
-    <BuildMacro Include="WXWIDGETS_LIB_X64">
-      <Value>$(WXWIDGETS_LIB_X64)</Value>
     </BuildMacro>
     <BuildMacro Include="WXWIDGETS_LIB_X86">
       <Value>$(WXWIDGETS_LIB_X86)</Value>

@@ -15,28 +15,37 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER I
 ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **************************************************************************************************************************/
 /*!
- * \file krt_tools_macro.h
- * \date 2018/12/25 11:11
+ * \file krt_math.h
+ * \date 2019/11/12 15:24
  *
  * \author www.xionggf.com
  * Contact: sun_of_lover@sina.com
  *
- * \brief 
+ * \brief 数学相关的库文件
  *
- * TODO: 本文件定义了一系列工具宏
+ * TODO: long description
  *
  * \note
 */
-#ifndef krt_tools_macro_h__
-#define krt_tools_macro_h__
+#ifndef krt_math_h__
+#define krt_math_h__
 
-#define KRT_SAFE_DELETE(pointer) do{if(pointer!=nullptr){delete pointer; pointer = nullptr; }}while(0)
-#define KRT_SAFE_DELETE_ARRAY(array_pointer) do{if(array_pointer!=nullptr){delete [] array_pointer; array_pointer = nullptr; }}while(0)
+namespace krt
+{
+    const double PI = 3.141592653589793238462643383279502884;
 
-#if defined(WIN32) || defined(_WIN32)
-#define KRT_INLINE __forceinline
-#else
-#define KRT_INLINE inline
-#endif
+    // EPSILON is a tolerance value for floating point roundoff error.
+    // It is used in many calculations where we want to err
+    // on a certain side of a threshold, such as determining
+    // whether or not a point is inside a solid or not,
+    // or whether a point is at least a minimum distance
+    // away from another point.
+    const double EPSILON = 1.0e-6;
 
-#endif // krt_tools_macro_h__
+    inline double RadiansFromDegrees(double degrees)
+    {
+        return degrees * (PI / 180.0);
+    }
+}
+
+#endif // krt_math_h__
