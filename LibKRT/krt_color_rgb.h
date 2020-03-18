@@ -34,7 +34,7 @@ ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALI
 
 namespace krt
 {
-    class RGBColor 
+    class RGBColor
     {
     public:
         float   red_, green_, blue_;
@@ -51,7 +51,7 @@ namespace krt
         {
             return (RGBColor(red_ + c.red_, green_ + c.green_, blue_ + c.blue_));
         }
-            
+
         KRT_INLINE RGBColor& operator+= (const RGBColor& c)
         {
             red_ += c.red_; green_ += c.green_; blue_ += c.blue_;
@@ -89,11 +89,11 @@ namespace krt
         {
             return (red_ == c.red_ && green_ == c.green_ && blue_ == c.blue_);
         }
-            
-        /****************************************      
-        *  Average 
+
+        /****************************************
+        *  Average
         *  @return  KRT_INLINE float
-        *  @see   
+        *  @see
         *  @note 将各颜色分量相加后除以3，返回
         ****************************************/
         KRT_INLINE float Average() const
@@ -101,11 +101,11 @@ namespace krt
             return (red_ + green_ + blue_) / 3.0f;
         }
 
-        /****************************************      
-        *  Powc 
-        *  @param   float p 
+        /****************************************
+        *  Powc
+        *  @param   float p
         *  @return  krt::RGBColor
-        *  @see   
+        *  @see
         *  @note 将各颜色分量进行一次幂运算操作，指数为p
         ****************************************/
         RGBColor Powc(float p) const;

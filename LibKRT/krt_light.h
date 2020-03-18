@@ -15,87 +15,68 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER I
 ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **************************************************************************************************************************/
 /*!
- * \file krt_ray.h
- * \date 2018/12/26 13:35
+ * \file krt_light.h
+ * \date 2020/03/15 22:56
  *
  * \author www.xionggf.com
  * Contact: sun_of_lover@sina.com
  *
- * \brief 
- *
- * TODO: 射线类
- *
- * \note 
+ * \brief 光源类的基类，作为多种光源的一个基类接口
 */
-#ifndef krt_ray_h__
-#define krt_ray_h__
 
-#include "krt_tools_macro.h"
+#ifndef krt_light_h__
+#define krt_light_h__
+
+#include "krt_color_rgb.h"
+#include "krt_ray.h"
+#include "krt_object.h"
 
 namespace krt
 {
-	class Ray 
-	{
-	public:
-        KRT_INLINE const glm::dvec3& origin() const
-        {
-            return origin_;
-        }
+    class ShadeHelper;
 
-        KRT_INLINE glm::dvec3 origin()
-        {
-            return origin_;
-        }
+    class Light : public Object
+    {
+    public:
+        /*********************************************************
+        缺省构造函数      
+        *********************************************************/
+        Light();
 
-        KRT_INLINE void set_origin(glm::dvec3 val)
-        {
-            origin_ = val;
-        }
-        
-        KRT_INLINE const glm::dvec3& direction() const 
-        {
-            return dir_; 
-        }
+        Light(const char* name);
 
-        KRT_INLINE glm::dvec3 direction()
-        {
-            return dir_;
-        }
-        
-        KRT_INLINE void set_direction(glm::dvec3 val)
-        {
-            dir_ = val; 
-        }
-
-        Ray();
-		
-        Ray(const glm::dvec3& o, const glm::dvec3& d);
-		
-        Ray(const Ray& ray);
+        Light(const std::string& name);
 
         /*********************************************************
-        移动构造函数，用以使用一个右值变量来构造本对象
-        @param  Ray&& ray 一个右值变量
+        拷贝构造函数
+        @param const Light& ls 作为拷贝源的右值对象
         *********************************************************/
-        Ray(Ray&& ray);
+        Light(const Light& ls);
 
-        Ray& operator= (const Ray& rhs);
-
-        ~Ray();
-   
         /*********************************************************
-        給定一個截距值，從origin點起，沿著dir方向，得到目標點坐標
-        @param  double intercept 截距值
-        @return 目標點坐標      
+        移动构造函数
+        @param  Light&& ls 作为拷贝源的右值对象      
         *********************************************************/
-        glm::dvec3 GetTargetPoint(double intercept) const;
+        Light(Light&& ls);
 
-    private:
-        glm::dvec3	origin_;  	// 起点坐标 
-        glm::dvec3	dir_; 		// 射线的发射方向 
+        /*********************************************************
+        重载赋值函数
+        @param  const Light& rhs
+        @return       
+        *********************************************************/
+        Light& operator= (const Light& rhs);
+
+        /*********************************************************
+        析构函数        
+        *********************************************************/
+        virtual ~Light();
+
+        virtual glm::dvec3 get_direction(ShadeHelper& sr) = 0;
+
+        virtual RGBColor L(ShadeHelper& sr);
     };
+
+    typedef std::shared_ptr<Light> LightSPtr;
 }
 
-#endif // krt_ray_h__
-
-
+#endif // krt_light_h__

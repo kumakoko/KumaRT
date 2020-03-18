@@ -48,22 +48,14 @@ namespace krt
 
         virtual ~SolidObject();
 
-        // Appends to 'intersectionList' all the 
-        // intersections found starting at the specified vantage 
-        // point in the direction of the direction vector.
-        /*************************************************************
-         * Method:    AppendAllIntersections
-         * FullName:  krt::SolidObject::AppendAllIntersections
-         * Access:    virtual public
-         * Returns:   void
-         * Parameter: const glm::dvec3 & vantage
-         * Parameter: const glm::dvec3 & direction
-         * Parameter: IntersectionList & intersectionList
-         * Description: 将从vantage点开始，沿着direction方向发出的光线，
-         *              和本solid object发生碰撞之后，产生的intersection
-         *              信息，放入到intersectionList表中
-        ************************************************************/
-        virtual void AppendAllIntersections(const glm::dvec3& vantage, const glm::dvec3& direction, IntersectionList& intersectionList) const = 0;
+        /*********************************************************
+        将从vantage点开始，沿着direction方向发出的光线，和本solid object发生碰撞之后，
+        产生的intersection 信息，放入到intersectionList表中
+        @param  const glm::dvec3 & vantage
+        @param  const glm::dvec3 & direction
+        @param  IntersectionList & intersection_list       
+        *********************************************************/
+        virtual void AppendAllIntersections(const glm::dvec3& vantage, const glm::dvec3& direction, IntersectionList& intersection_list) const = 0;
 
         // Searches for any intersections with this solid from the 
         // vantage point in the given direction.  If none are found, the 
@@ -127,15 +119,12 @@ namespace krt
         // the new location (cx, cy, cz).
         SolidObject& Move(double cx, double cy, double cz);
 
-        /*************************************************************
-         * Method:    Move
-         * FullName:  krt::SolidObject::Move
-         * Access:    public
-         * Returns:   krt::SolidObject& 返回本对象的引用
-         * Parameter: const glm::dvec3 & newCenter 新的中心点位置
-         * Description:  移动本solid color的中心点，到另一个新位置
-        ************************************************************/
-        SolidObject& Move(const glm::dvec3& newCenter);
+        /*********************************************************
+        移动本solid color的中心点，到另一个新位置
+        @param  const glm::dvec3 & new_center 新的中心点位置
+        @return 返回本对象的引用      
+        *********************************************************/
+        SolidObject& Move(const glm::dvec3& new_center);
 
         inline const glm::dvec3& Center() const
         {

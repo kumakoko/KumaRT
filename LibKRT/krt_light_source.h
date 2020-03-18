@@ -21,11 +21,7 @@ ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALI
  * \author www.xionggf.com
  * Contact: sun_of_lover@sina.com
  *
- * \brief 
- *
- * TODO: 各种光源的基类，在KRT中，光源分为有向平行光，点光源，聚光灯光源，区域面光源四种
- *
- * \note
+ * \brief 各种光源的基类，在KRT中，光源分为有向平行光，点光源，聚光灯光源，区域面光源四种
 */
 
 #include "krt_object.h"

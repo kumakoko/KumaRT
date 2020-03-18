@@ -15,55 +15,48 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER I
 ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **************************************************************************************************************************/
 /*!
- * \file krt_optics.h
- * \date 2019/11/11 20:47
+ * \file krt_plane.h
+ * \date 2020/03/17 16:15
  *
  * \author www.xionggf.com
  * Contact: sun_of_lover@sina.com
  *
- * \brief 用来描述光线和物体在其表面某点发生相交之后，得到的光学属性
+ * \brief 表征一个平面的类。使用点法式描述
 */
-#ifndef krt_optics_h__
-#define krt_optics_h__
+#ifndef krt_plane_h__
+#define krt_plane_h__
+
+#include "krt_geometry_object.h"
+#include "krt_shade_helper.h"
 
 namespace krt
 {
-    // class Optics describes the way a surface point interacts with light.
-
-    class Optics
+    class Plane : public GeometricObject
     {
     public:
-        Optics();
-        explicit Optics(glm::vec3 _matteColor, glm::vec3 _glossColor = glm::vec3(0.0, 0.0, 0.0), double _opacity = 1.0);
-       
-        // glossFactor 表面光泽度，1表示绝对光滑，0表示绝对粗糙
-        void SetMatteGlossBalance(double glossFactor,const glm::dvec3& rawMatteColor,const glm::dvec3& rawGlossColor);
+        Plane();
 
-        void SetMatteColor(const glm::vec3& _matteColor);
-        void SetGlossColor(const glm::vec3& _glossColor);
-        void SetOpacity(double _opacity);
+        Plane(const glm::dvec3& point, const glm::dvec3& normal);
 
-        inline  const glm::vec3& GetMatteColor() const
-        {
-            return matteColor;
-        }
-        inline const glm::vec3& GetGlossColor() const
-        {
-            return glossColor;
-        }
-        inline const double GetOpacity()    const
-        {
-            return opacity;
-        }
+        Plane(const Plane& plane);
 
-    protected:
-        void ValidateReflectionColor(const glm::dvec3& color) const;
+        Plane(Plane&& rhs);
+
+        virtual GeometricObjectSPtr clone() const override;
+
+        Plane& operator= (const Plane& rhs);
+
+        virtual ~Plane();
+
+        virtual bool hit(const Ray& ray, double& tmin, ShadeHelper& sr) const;
 
     private:
-        glm::vec3   matteColor;     // color, intensity of scattered reflection
-        glm::vec3   glossColor;     // color, intensity of mirror reflection
-        double  opacity;        // fraction 0..1 of reflected light
+        glm::dvec3 point_;   				// point through which plane passes 
+        glm::dvec3 normal_;					// normal to the plane
+        static const double kEpsilon;   // for shadows and secondary rays
     };
+
+    typedef std::shared_ptr<Plane> PlaneSPtr;
 }
 
-#endif // krt_optics_h__
+#endif // krt_plane_h__

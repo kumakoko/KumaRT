@@ -13,6 +13,24 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="头文件\Light">
+      <UniqueIdentifier>{cb83488d-c93f-4126-8b8f-f95895dc7c2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Light">
+      <UniqueIdentifier>{09fc8c05-c866-460f-919b-1450337662ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Geometry">
+      <UniqueIdentifier>{d1d3055a-5766-4257-a2a1-065de4b43e07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Geometry">
+      <UniqueIdentifier>{f4c0a2e7-7434-422d-969a-828b45a7e7b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Camera">
+      <UniqueIdentifier>{906d7698-c4ce-42b0-96fc-ae270d154337}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Camera">
+      <UniqueIdentifier>{47e50543-a435-4504-a0f1-982336be21de}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="krt_lib_pch.h">
@@ -33,35 +51,50 @@
     <ClInclude Include="krt_material.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="krt_geometry_object.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="krt_bounding_box.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="krt_object.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="krt_light_source.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="krt_intersection.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="krt_solid_object.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="krt_optics.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="krt_substance_refraction.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="krt_math.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="krt_sphere.h">
+    <ClInclude Include="krt_view_plane.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="krt_world.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="krt_tracer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="krt_light.h">
+      <Filter>头文件\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="krt_light_source.h">
+      <Filter>头文件\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="krt_ambient_light.h">
+      <Filter>头文件\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="krt_geometry_object.h">
+      <Filter>头文件\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="krt_plane.h">
+      <Filter>头文件\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="krt_sphere.h">
+      <Filter>头文件\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="krt_bounding_box.h">
+      <Filter>头文件\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="krt_camera.h">
+      <Filter>头文件\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="krt_pinhole_camera.h">
+      <Filter>头文件\Camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -80,22 +113,7 @@
     <ClCompile Include="krt_material.cc">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="krt_geometry_object.cc">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="krt_bounding_box.cc">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="krt_object.cc">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="krt_light_source.cc">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="krt_intersection.cc">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="krt_solid_object.cc">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="krt_optics.cc">
@@ -104,8 +122,41 @@
     <ClCompile Include="krt_substance_refraction.cc">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="krt_sphere.cc">
+    <ClCompile Include="krt_view_plane.cc">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="krt_world.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="krt_tracer.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="krt_light.cc">
+      <Filter>源文件\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="krt_light_source.cc">
+      <Filter>源文件\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="krt_ambient_light.cc">
+      <Filter>源文件\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="krt_geometry_object.cc">
+      <Filter>源文件\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="krt_plane.cc">
+      <Filter>源文件\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="krt_sphere.cc">
+      <Filter>源文件\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="krt_bounding_box.cc">
+      <Filter>源文件\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="krt_camera.cc">
+      <Filter>源文件\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="krt_pinhole_camera.cc">
+      <Filter>源文件\Camera</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

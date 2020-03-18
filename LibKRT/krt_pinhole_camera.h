@@ -15,55 +15,65 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER I
 ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **************************************************************************************************************************/
 /*!
- * \file krt_optics.h
- * \date 2019/11/11 20:47
+ * \file krt_pinhole_camera.h
+ * \date 2020/03/18 12:52
  *
  * \author www.xionggf.com
  * Contact: sun_of_lover@sina.com
  *
- * \brief 用来描述光线和物体在其表面某点发生相交之后，得到的光学属性
+ * \brief
+ *
+ * TODO:
+ *
+ * \note
 */
-#ifndef krt_optics_h__
-#define krt_optics_h__
+
+#ifndef krt_pinhole_camera_h__
+#define krt_pinhole_camera_h__
+
+#include "krt_tools_macro.h"
+#include "krt_camera.h"
 
 namespace krt
 {
-    // class Optics describes the way a surface point interacts with light.
-
-    class Optics
+    class Pinhole : public Camera
     {
     public:
-        Optics();
-        explicit Optics(glm::vec3 _matteColor, glm::vec3 _glossColor = glm::vec3(0.0, 0.0, 0.0), double _opacity = 1.0);
-       
-        // glossFactor 表面光泽度，1表示绝对光滑，0表示绝对粗糙
-        void SetMatteGlossBalance(double glossFactor,const glm::dvec3& rawMatteColor,const glm::dvec3& rawGlossColor);
 
-        void SetMatteColor(const glm::vec3& _matteColor);
-        void SetGlossColor(const glm::vec3& _glossColor);
-        void SetOpacity(double _opacity);
+        Pinhole();
 
-        inline  const glm::vec3& GetMatteColor() const
+        Pinhole(const Pinhole& ph);
+
+        virtual std::shared_ptr<Object> Clone() const override;
+
+        virtual Pinhole& operator= (const Pinhole& rhs);
+
+        virtual ~Pinhole();
+
+        KRT_INLINE void set_view_distance(float _d) 
         {
-            return matteColor;
-        }
-        inline const glm::vec3& GetGlossColor() const
-        {
-            return glossColor;
-        }
-        inline const double GetOpacity()    const
-        {
-            return opacity;
+            d = _d;
         }
 
-    protected:
-        void ValidateReflectionColor(const glm::dvec3& color) const;
+        KRT_INLINE void set_zoom(float zoom_factor) 
+        {
+            zoom = zoom_factor;
+        }
+
+        glm::dvec3 get_direction(const glm::dvec2& p) const;
+     
+        virtual void render_scene(const World* w) override;
 
     private:
-        glm::vec3   matteColor;     // color, intensity of scattered reflection
-        glm::vec3   glossColor;     // color, intensity of mirror reflection
-        double  opacity;        // fraction 0..1 of reflected light
+        /** * @brief 摄像机到视平面的距离  */
+        double d;
+
+        /** * @brief 视口的宽高比  */
+        float zoom;
+
     };
+
+
 }
 
-#endif // krt_optics_h__
+#endif // krt_pinhole_camera_h__

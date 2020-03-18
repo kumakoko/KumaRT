@@ -25,12 +25,12 @@ namespace krt
 	{
 	}
 
-	BoundingBox::BoundingBox(const double _x0, const double _x1,const double _y0, const double _y1,const double _z0, const double _z1)
+	BoundingBox::BoundingBox( double _x0,  double _x1, double _y0,  double _y1, double _z0,  double _z1)
 		                     : x0_(_x0), x1_(_x1), y0_(_y0), y1_(_y1), z0_(_z0), z1_(_z1)
 	{
 	}
 
-	BoundingBox::BoundingBox(const glm::vec3& p0, const glm::vec3& p1)
+	BoundingBox::BoundingBox(const glm::dvec3& p0, const glm::dvec3& p1)
 		: x0_(p0.x), x1_(p1.x), y0_(p0.y), y1_(p1.y), z0_(p0.z), z1_(p1.z)
 	{
 	}
@@ -39,6 +39,16 @@ namespace krt
 		                                               y1_(bbox.y1_), z0_(bbox.z0_), z1_(bbox.z1_)
 	{
 	}
+
+    BoundingBox::BoundingBox(BoundingBox&& rhs)
+    {
+        x0_ = rhs.x0_;
+        x1_ = rhs.x1_;
+        y0_ = rhs.y0_;
+        y1_ = rhs.y1_;
+        z0_ = rhs.z0_;
+        z1_ = rhs.z1_;
+    }
 
 	BoundingBox& BoundingBox::operator= (const BoundingBox& rhs)
 	{
@@ -67,8 +77,8 @@ namespace krt
 	*/
 	bool BoundingBox::Hit(const Ray& ray) const 
 	{
-		double ox = ray.origin_.x; double oy = ray.origin_.y; double oz = ray.origin_.z;
-		double dx = ray.dir_.x; double dy = ray.dir_.y; double dz = ray.dir_.z;
+		double ox = ray.origin().x; double oy = ray.origin().y; double oz = ray.origin().z;
+		double dx = ray.direction().x; double dy = ray.direction().y; double dz = ray.direction().z;
 
 		double tx_min, ty_min, tz_min;
 		double tx_max, ty_max, tz_max;

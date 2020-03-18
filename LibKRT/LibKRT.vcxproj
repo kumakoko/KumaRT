@@ -19,13 +19,16 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="krt_ambient_light.h" />
+    <ClInclude Include="krt_camera.h" />
+    <ClInclude Include="krt_light.h" />
     <ClInclude Include="krt_math.h" />
     <ClInclude Include="krt_optics.h" />
-    <ClInclude Include="krt_solid_object.h" />
+    <ClInclude Include="krt_pinhole_camera.h" />
+    <ClInclude Include="krt_plane.h" />
     <ClInclude Include="krt_bounding_box.h" />
     <ClInclude Include="krt_color_rgb.h" />
     <ClInclude Include="krt_geometry_object.h" />
-    <ClInclude Include="krt_intersection.h" />
     <ClInclude Include="krt_lib_pch.h" />
     <ClInclude Include="krt_light_source.h" />
     <ClInclude Include="krt_material.h" />
@@ -33,16 +36,21 @@
     <ClInclude Include="krt_ray.h" />
     <ClInclude Include="krt_shade_helper.h" />
     <ClInclude Include="krt_sphere.h" />
-    <ClInclude Include="krt_substance_refraction.h" />
     <ClInclude Include="krt_tools_macro.h" />
+    <ClInclude Include="krt_tracer.h" />
+    <ClInclude Include="krt_view_plane.h" />
+    <ClInclude Include="krt_world.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="krt_ambient_light.cc" />
+    <ClCompile Include="krt_camera.cc" />
+    <ClCompile Include="krt_light.cc" />
     <ClCompile Include="krt_optics.cc" />
-    <ClCompile Include="krt_solid_object.cc" />
+    <ClCompile Include="krt_pinhole_camera.cc" />
+    <ClCompile Include="krt_plane.cc" />
     <ClCompile Include="krt_bounding_box.cc" />
     <ClCompile Include="krt_color_rgb.cc" />
     <ClCompile Include="krt_geometry_object.cc" />
-    <ClCompile Include="krt_intersection.cc" />
     <ClCompile Include="krt_lib_pch.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -54,6 +62,9 @@
     <ClCompile Include="krt_shade_helper.cc" />
     <ClCompile Include="krt_sphere.cc" />
     <ClCompile Include="krt_substance_refraction.cc" />
+    <ClCompile Include="krt_tracer.cc" />
+    <ClCompile Include="krt_view_plane.cc" />
+    <ClCompile Include="krt_world.cc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

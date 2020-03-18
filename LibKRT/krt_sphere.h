@@ -1,4 +1,4 @@
-/**************************************************************************************************************************
+﻿/**************************************************************************************************************************
 Copyright(C) 2014-2019 www.xionggf.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
@@ -31,29 +31,99 @@ ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALI
 #ifndef krt_sphere_h__
 #define krt_sphere_h__
 
-#include "krt_solid_object.h"
+#include "krt_geometry_object.h"
+#include "krt_shade_helper.h"
+#include "krt_tools_macro.h"
 
 namespace krt
 {
-    // A sphere that is more efficient than Spheroid with equal dimensions.
-    class Sphere : public SolidObject
+    class Sphere : public GeometricObject 
     {
     public:
-        Sphere(const glm::dvec3& _center, double _radius);
+        /*********************************************************
+        
+        @return 
+        @see function  
+        @note           
+        @attention      
+        @bug            
+        @warning        
+        *********************************************************/
+        Sphere(); 
 
-        virtual void AppendAllIntersections(const glm::dvec3& vantage,const glm::dvec3& direction,IntersectionList& intersectionList) const override;
+        /*********************************************************
+        
+        @param  const glm::dvec3 & center
+        @param  double r
+        @return 
+        @see function  
+        @note           
+        @attention      
+        @bug            
+        @warning        
+        *********************************************************/
+        Sphere(const glm::dvec3& center, double r);
 
-        virtual bool Contains(const glm::dvec3& point) const override;
+        /*********************************************************
+        
+        @param  const Sphere & sphere
+        @return 
+        @see function  
+        @note           
+        @attention      
+        @bug            
+        @warning        
+        *********************************************************/
+        Sphere(const Sphere& sphere);
 
-        // The nice thing about a sphere is that rotating 
-        // it has no effect on its appearance!
-        virtual SolidObject& RotateX(double angleInDegrees) override;
-        virtual SolidObject& RotateY(double angleInDegrees) override;
-        virtual SolidObject& RotateZ(double angleInDegrees) override;
+        /*********************************************************
+        
+        @param  Sphere & & sphere
+        @return 
+        @see function  
+        @note           
+        @attention      
+        @bug            
+        @warning        
+        *********************************************************/
+        Sphere(Sphere&& sphere);
+
+        virtual GeometricObjectSPtr clone() const;
+
+        virtual	~Sphere(void);
+
+        Sphere& operator = (const Sphere& sphere);
+
+        KRT_INLINE void Sphere::set_center(const glm::dvec3& c)
+        {
+            center_ = c;
+        }
+
+        KRT_INLINE void set_center(const double x, const double y, const double z)
+        {
+            center_.x = x;
+            center_.y = y;
+            center_.z = z;
+        }
+
+        KRT_INLINE void set_radius(const double r) 
+        {
+            radius_ = r;
+        }
+
+        virtual bool hit(const Ray& ray, double& t, ShadeHelper& s) const override;
 
     private:
-        double  radius;
+
+        glm::dvec3 	center_;   			// center coordinates as a point  
+        double 		radius_;				// the radius 
+
+        static const double kEpsilon;   // for shadows and secondary rays
     };
+
+
+
+
 }
 
 #endif // krt_sphere_h__

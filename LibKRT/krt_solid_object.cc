@@ -42,9 +42,9 @@ namespace krt
 
     // Moves the center of the solid object to the 
     // location specified by the position vector newCenter.
-    SolidObject& SolidObject::Move(const glm::vec3& newCenter)
+    SolidObject& SolidObject::Move(const glm::vec3& new_center)
     {
-        Move(newCenter.x, newCenter.y, newCenter.z);
+        Move(new_center.x, new_center.y, new_center.z);
         return *this;
     }
 

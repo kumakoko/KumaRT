@@ -31,21 +31,84 @@ ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALI
 #ifndef krt_object_h__
 #define krt_object_h__
 
+#include "krt_tools_macro.h"
+
 namespace krt
 {
-    class Object
+    class Object : public std::enable_shared_from_this<Object>
     {
-    private:
+    protected:
         std::string name_;
     public:
+        /*********************************************************
+        构造函数       
+        *********************************************************/
         Object();
+
+        /*********************************************************
+        构造函数
+        @param  const char * name 本object的名字字符串       
+        *********************************************************/
         Object(const char* name);
+        
+        /*********************************************************
+        构造函数
+        @param  const std::string & name 本object的名字字符串
+        *********************************************************/
         Object(const std::string& name);
+
+        /*********************************************************
+        析构函数       
+        *********************************************************/
         virtual ~Object();
-        void SetName(const char* name);
-        void SetName(const std::string& name);
-        const std::string& GetName() const;
+
+        /*********************************************************
+        拷贝构造函数
+        @param  const Object& rhs 作为拷贝源的对象
+        *********************************************************/
+        Object(const Object& rhs);
+
+        /*********************************************************
+        移动构造函数
+        @param  Object&& rhs 作为拷贝源的右值对象
+        *********************************************************/
+        Object(Object&& rhs);
+
+        /*********************************************************
+        设置本object的名字
+        @param  const char * name 本object的名字字符串     
+        *********************************************************/
+        KRT_INLINE void set_name(const char* name)
+        {
+            name_ = name;
+        }
+
+        /*********************************************************
+        设置本object的名字
+        @param  const std::string & name      
+        *********************************************************/
+        KRT_INLINE void set_name(const std::string& name)
+        {
+            name_ = name;
+        }
+
+        /*********************************************************
+        获取到本object的名字
+        @return  本object的名字       
+        *********************************************************/
+        KRT_INLINE const std::string& name() const
+        {
+            return name_;
+        }
+
+        /*********************************************************
+        从本对象克隆一个副本出来的接口函数
+        @return 返回一个本对象克隆出来的副本对象      
+        *********************************************************/
+        virtual std::shared_ptr<Object> Clone() const = 0;
     };
+
+    typedef std::shared_ptr<Object> ObjectSPtr;
 }
 
 

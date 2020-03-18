@@ -28,21 +28,33 @@ namespace krt
 	{
 	}
 
-	Ray::Ray(const Ray& ray): origin_(ray.origin_),dir_(ray.dir_)
+	Ray::Ray(const Ray& ray): origin_(ray.origin()),dir_(ray.direction())
 	{
 	}
+
+    Ray::Ray(Ray&& rhs)
+    {
+        this->set_origin(rhs.origin());
+        this->set_direction(rhs.direction());
+    }
 
 	Ray& Ray::operator= (const Ray& rhs)
 	{
 		if (this == &rhs)
 			return (*this);
 
-		this->origin_ = rhs.origin_;
-		this->dir_ = rhs.dir_;
+		this->set_origin(rhs.origin());
+		this->set_direction(rhs.direction());
 		return (*this);
 	}
 
 	Ray::~Ray() 
 	{
+
 	}
+
+    glm::dvec3 Ray::GetTargetPoint(double intercept) const
+    {
+        return glm::dvec3(this->origin() + intercept * this->direction());
+    }
 }

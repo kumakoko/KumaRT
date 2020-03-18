@@ -21,50 +21,80 @@ ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALI
  * \author www.xionggf.com
  * Contact: sun_of_lover@sina.com
  *
- * \brief 
- *
- * TODO: 包围盒
- *
- * \note
+ * \brief 包围盒
 */
 namespace krt
 {
-	class Ray;
+    class Ray;
 
-	class BoundingBox 
-	{
-	public:
-		
-		double x0_, x1_, y0_, y1_, z0_, z1_; // 包围盒的左下角和右上角的坐标值
+    class BoundingBox
+    {
+    public:
+        /*********************************************************
+        缺省构造函数
+        *********************************************************/
+        BoundingBox();
 
-		BoundingBox();
+        /*********************************************************
+        构造函数
+        @param double x0 包围盒左上角顶点坐标x
+        @param double x1 包围盒左上角顶点坐标y
+        @param double y0 包围盒左上角顶点坐标z
+        @param double y1 包围盒右下角顶点坐标x
+        @param double z0 包围盒右下角顶点坐标y
+        @param double z1 包围盒右下角顶点坐标z
+        *********************************************************/
+        BoundingBox(double x0, double x1, double y0, double y1, double z0, double z1);
 
-		BoundingBox(const double x0, const double x1,const double y0, const double y1,const double z0, const double z1);
+        /*********************************************************
+        构造函数
+        @param  const glm::dvec3 & p0 包围盒左上角顶点坐标
+        @param  const glm::dvec3 & p1 包围盒右下角顶点坐标
+        *********************************************************/
+        BoundingBox(const glm::dvec3& p0, const glm::dvec3& p1);
 
-		BoundingBox(const glm::vec3& p0, const glm::vec3& p1);
+        /*********************************************************
+        拷贝构造函数
+        @param  const BoundingBox & bbox 作为数据源的对象
+        *********************************************************/
+        BoundingBox(const BoundingBox& bbox);
 
-		BoundingBox(const BoundingBox& bbox);
+        /*********************************************************
+        移动构造函数
+        @param  BoundingBox&& rhs 作为数据源的右值对象
+        *********************************************************/
+        BoundingBox(BoundingBox&& rhs);
 
-		BoundingBox& operator= (const BoundingBox& rhs);
+        /*********************************************************
+        重载赋值函数
+        @param  const BoundingBox & rhs 作为数据源的对象
+        *********************************************************/
+        BoundingBox& operator = (const BoundingBox& rhs);
 
-		~BoundingBox();
+        /*********************************************************
+        析构函数
+        *********************************************************/
+        ~BoundingBox();
 
-		/****************************************      
-		*  Hit 
-		*  @param   const Ray & ray 
-		*  @return  bool 判断射线ray是否和本盒相交，是的话返回true，否返回false
-		*  @see   
-		*  @note 判断射线ray是否和本盒相交
-		****************************************/
-		bool Hit(const Ray& ray) const;
+        /****************************************
+        *  Hit
+        *  @param   const Ray & ray 用来检测的射线
+        *  @return  bool 判断射线ray是否和本盒相交，是的话返回true，否返回false
+        *  @see
+        *  @note 判断射线ray是否和本盒相交
+        ****************************************/
+        bool Hit(const Ray& ray) const;
 
-		/****************************************      
-		*  Inside 
-		*  @param   const glm::vec3 & p 
-		*  @return  bool 判断某点p是否在本盒内，是的话返回true，否返回false
-		*  @see   
-		*  @note 判断某点p是否在本盒内
-		****************************************/
-		bool Inside(const glm::vec3& p) const;
-	};
+        /****************************************
+        *  Inside
+        *  @param   const glm::vec3 & p 待判断的点
+        *  @return  bool 判断某点p是否在本盒内，是的话返回true，否返回false
+        *  @see
+        *  @note 判断某点p是否在本盒内
+        ****************************************/
+        bool Inside(const glm::vec3& p) const;
+    public:
+        /** * @brief 包围盒的左下角和右上角的坐标值  */
+        double x0_, x1_, y0_, y1_, z0_, z1_; // 
+    };
 }

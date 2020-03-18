@@ -22,25 +22,22 @@ ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALI
  * Contact: sun_of_lover@sina.com
  *
  * \brief 数学相关的库文件
- *
- * TODO: long description
- *
- * \note
 */
 #ifndef krt_math_h__
 #define krt_math_h__
 
 namespace krt
 {
+    /** * @brief 圆周率  */
     const double PI = 3.141592653589793238462643383279502884;
 
-    // EPSILON is a tolerance value for floating point roundoff error.
-    // It is used in many calculations where we want to err
-    // on a certain side of a threshold, such as determining
-    // whether or not a point is inside a solid or not,
-    // or whether a point is at least a minimum distance
-    // away from another point.
+    /** * @brief EPSILON是浮点舍入误差的公差值。用来确定当前值与
+    目标阈值之间的差值，是不是在允许的范围内。例如用来确定点是否在
+    实体内部，或者一个点是否至少是最小距离远离另一点。*/
     const double EPSILON = 1.0e-6;
+
+    /** * @brief 本框架所使用的最大的浮点数  */
+    const double HUGE_VALUE = 1.0e+10;
 
     inline double RadiansFromDegrees(double degrees)
     {

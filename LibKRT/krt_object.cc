@@ -22,6 +22,7 @@ namespace krt
 {
     Object::Object()
     {
+        this->name_ = "KRTObject";
     }
 
     Object::Object(const char* name) : name_(name)
@@ -36,18 +37,14 @@ namespace krt
     {
     }
 
-    const std::string& Object::GetName() const
+    Object::Object(const Object& rhs)
     {
-        return name_;
+        this->name_ = rhs.name_;
     }
 
-    void Object::SetName(const char* name)
+    Object::Object(Object&& rhs)
     {
-        name_ = name;
-    }
-
-    void Object::SetName(const std::string& name)
-    {
-        name_ = name;
+        this->name_ = rhs.name_;
+        rhs.name_.clear();
     }
 }

@@ -30,13 +30,54 @@ ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALI
 #ifndef krt_shade_helper_h__
 #define krt_shade_helper_h__
 
+#include "krt_color_rgb.h"
+#include "krt_ray.h"
+
 namespace krt
 {
+    class Material;
+    class World;
+
 	class ShadeHelper
 	{
 	public:
-		ShadeHelper();
+        ShadeHelper();
+		ShadeHelper(bool hit_an_object,const RGBColor& rgb,const glm::dvec3& hit_point, const glm::dvec3& local_hit_point,
+            const glm::dvec3& normal,const Ray& ray, int depth,float ray_parameter,std::shared_ptr<World> w, std::shared_ptr<Material> material);
+        ShadeHelper(ShadeHelper&& rhs);
+        ShadeHelper(const ShadeHelper& rhs);
 		~ShadeHelper();
+        bool hit_an_object() const { return hit_an_object_; }
+        void set_hit_an_object(bool val) { hit_an_object_ = val; }
+        krt::RGBColor color() const { return color_; }
+        void set_color(krt::RGBColor val) { color_ = val; }
+        glm::dvec3 hit_point() const { return hit_point_; }
+        void set_hit_point(glm::dvec3 val) { hit_point_ = val; }
+        glm::dvec3 local_hit_point() const { return local_hit_point_; }
+        void set_local_hit_point(glm::dvec3 val) { local_hit_point_ = val; }
+        glm::dvec3 normal() const { return normal_; }
+        void set_normal(glm::dvec3 val) { normal_ = val; }
+        krt::Ray ray() const { return ray_; }
+        void set_ray(krt::Ray val) { ray_ = val; }
+        int depth() const { return depth_; }
+        void set_depth(int val) { depth_ = val; }
+        double ray_parameter() const { return ray_parameter_; }
+        void set_ray_parameter(double val) { ray_parameter_ = val; }
+        std::shared_ptr<krt::World> world() const { return world_; }
+        void set_world(std::shared_ptr<krt::World> val) { world_ = val; }
+        std::shared_ptr<krt::Material> material() const { return material_; }
+        void set_material(std::shared_ptr<krt::Material> val) { material_ = val; }
+    private:
+        bool hit_an_object_;		// Did the ray hit an object?  
+        RGBColor color_;
+        glm::dvec3  hit_point_;			// World coordinates of intersection
+        glm::dvec3  local_hit_point_;	// World coordinates of hit point on generic object (used for texture transformations)
+        glm::dvec3  normal_;				// Normal at hit point
+        Ray ray_;				// Required for specular highlights and area lights
+        int depth_;				// recursion depth
+        double ray_parameter_;					// ray parameter
+        std::shared_ptr<World>  world_;					// World reference
+        std::shared_ptr<Material> material_;		// Pointer to the nearest object's material      
 	};
 }
 

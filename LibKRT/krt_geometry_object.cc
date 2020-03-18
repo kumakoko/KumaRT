@@ -21,27 +21,33 @@ ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALI
 
 namespace krt
 {
-	GeometricObject::GeometricObject(): color(0.0f,0.0f,0.0f),
-		                                material_(nullptr),
-		                                shadows(true)
+	GeometricObject::GeometricObject(): 
+        color_(0.0f,0.0f,0.0f),material_(nullptr),shadows_(true)
 	{
 	}
 
-	GeometricObject::GeometricObject(const GeometricObject& object): color(object.color),
-		                                                             shadows(object.shadows)
+	GeometricObject::GeometricObject(const GeometricObject& object): 
+        color_(object.color_),shadows_(object.shadows_)
 	{
 		this->material_ = object.material_;
 	}
+
+    GeometricObject::GeometricObject(GeometricObject&& rhs)
+    {
+        this->color_ = rhs.color_;
+        this->shadows_ = rhs.shadows_;
+        this->material_ = rhs.material_;
+        rhs.material_.reset();
+    }
 
 	GeometricObject& GeometricObject::operator= (const GeometricObject& rhs) 
 	{
 		if (this == &rhs)
 			return (*this);
 
-		color = rhs.color;
-		material_.reset();
+		color_ = rhs.color_;
 		material_ = rhs.material_;
-		shadows = rhs.shadows;
+		shadows_ = rhs.shadows_;
 		return *this;
 	}
 
@@ -50,13 +56,13 @@ namespace krt
 		material_.reset();
 	}
 
-	void GeometricObject::add_object(GeometricObject* object_ptr)
+	void GeometricObject::add_object(std::shared_ptr<GeometricObject> object_ptr)
 	{
 	}
 
-	glm::vec3 GeometricObject::get_normal() const
+	glm::dvec3 GeometricObject::get_normal() const
 	{
-		return glm::vec3(0.0f);
+		return glm::dvec3(0.0);
 	}
 
 	void GeometricObject::set_material(MaterialSPtr mPtr)
@@ -64,7 +70,8 @@ namespace krt
 		material_ = mPtr;
 	}
 
-	glm::vec3 GeometricObject::get_normal(const glm::vec3& p) {
+	glm::dvec3 GeometricObject::get_normal(const glm::dvec3& p)
+    {
 		return glm::vec3(0.0f);
 	}
 
@@ -77,13 +84,13 @@ namespace krt
 		return BoundingBox();
 	}
 
-	glm::vec3 GeometricObject::sample()
+	glm::dvec3 GeometricObject::sample()
 	{
-		return glm::vec3(0.0f);
+		return glm::dvec3(0.0);
 	}
 
-	float GeometricObject::PDF(ShadeHelper& sr)
+	double GeometricObject::PDF(ShadeHelper& sr)
 	{
-		return 0.0f;
+		return 0.0;
 	}
 }
