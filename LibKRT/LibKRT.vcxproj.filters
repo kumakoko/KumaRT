@@ -31,6 +31,12 @@
     <Filter Include="源文件\Camera">
       <UniqueIdentifier>{47e50543-a435-4504-a0f1-982336be21de}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\Material">
+      <UniqueIdentifier>{1cc8b275-7bb6-4dee-8cb3-d3e3cd21f4e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Material">
+      <UniqueIdentifier>{9b5003d4-788f-4a50-901f-1cee5b686ff2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="krt_lib_pch.h">
@@ -46,9 +52,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="krt_shade_helper.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="krt_material.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="krt_object.h">
@@ -96,6 +99,12 @@
     <ClInclude Include="krt_pinhole_camera.h">
       <Filter>头文件\Camera</Filter>
     </ClInclude>
+    <ClInclude Include="krt_material.h">
+      <Filter>头文件\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="krt_flat_color_material.h">
+      <Filter>头文件\Material</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="krt_ray.cc">
@@ -108,9 +117,6 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="krt_shade_helper.cc">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="krt_material.cc">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="krt_object.cc">
@@ -157,6 +163,12 @@
     </ClCompile>
     <ClCompile Include="krt_pinhole_camera.cc">
       <Filter>源文件\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="krt_material.cc">
+      <Filter>源文件\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="krt_flat_color_material.cc">
+      <Filter>源文件\Material</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

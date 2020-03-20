@@ -32,6 +32,7 @@ ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALI
 
 #include "krt_color_rgb.h"
 #include "krt_ray.h"
+#include "krt_tools_macro.h"
 
 namespace krt
 {
@@ -42,31 +43,115 @@ namespace krt
 	{
 	public:
         ShadeHelper();
+
 		ShadeHelper(bool hit_an_object,const RGBColor& rgb,const glm::dvec3& hit_point, const glm::dvec3& local_hit_point,
             const glm::dvec3& normal,const Ray& ray, int depth,float ray_parameter,std::shared_ptr<World> w, std::shared_ptr<Material> material);
+
         ShadeHelper(ShadeHelper&& rhs);
+
         ShadeHelper(const ShadeHelper& rhs);
+
 		~ShadeHelper();
-        bool hit_an_object() const { return hit_an_object_; }
-        void set_hit_an_object(bool val) { hit_an_object_ = val; }
-        krt::RGBColor color() const { return color_; }
-        void set_color(krt::RGBColor val) { color_ = val; }
-        glm::dvec3 hit_point() const { return hit_point_; }
-        void set_hit_point(glm::dvec3 val) { hit_point_ = val; }
-        glm::dvec3 local_hit_point() const { return local_hit_point_; }
-        void set_local_hit_point(glm::dvec3 val) { local_hit_point_ = val; }
-        glm::dvec3 normal() const { return normal_; }
-        void set_normal(glm::dvec3 val) { normal_ = val; }
-        krt::Ray ray() const { return ray_; }
-        void set_ray(krt::Ray val) { ray_ = val; }
-        int depth() const { return depth_; }
-        void set_depth(int val) { depth_ = val; }
-        double ray_parameter() const { return ray_parameter_; }
-        void set_ray_parameter(double val) { ray_parameter_ = val; }
-        std::shared_ptr<krt::World> world() const { return world_; }
-        void set_world(std::shared_ptr<krt::World> val) { world_ = val; }
-        std::shared_ptr<krt::Material> material() const { return material_; }
-        void set_material(std::shared_ptr<krt::Material> val) { material_ = val; }
+
+        KRT_INLINE bool hit_an_object() const
+        {
+            return hit_an_object_;
+        }
+        
+        KRT_INLINE void set_hit_an_object(bool val)
+        {
+            hit_an_object_ = val;
+        }
+        
+        KRT_INLINE krt::RGBColor color() const
+        {
+            return color_;
+        }
+        
+        KRT_INLINE void set_color(krt::RGBColor val)
+        { 
+            color_ = val;
+        }
+        
+        KRT_INLINE glm::dvec3 hit_point() const
+        { 
+            return hit_point_;
+        }
+        
+        KRT_INLINE void set_hit_point(glm::dvec3 val)
+        {
+            hit_point_ = val; 
+        }
+        
+        KRT_INLINE glm::dvec3 local_hit_point() const
+        { 
+            return local_hit_point_;
+        }
+        
+        KRT_INLINE void set_local_hit_point(glm::dvec3 val)
+        { 
+            local_hit_point_ = val;
+        }
+        
+        KRT_INLINE glm::dvec3 normal() const
+        {
+            return normal_;
+        }
+        
+        KRT_INLINE void set_normal(glm::dvec3 val)
+        {
+            normal_ = val;
+        }
+        
+        KRT_INLINE krt::Ray ray() const
+        {
+            return ray_; 
+        }
+        
+        KRT_INLINE void set_ray(krt::Ray val)
+        { 
+            ray_ = val; 
+        }
+        
+        KRT_INLINE int depth() const
+        { 
+            return depth_;
+        }
+        
+        KRT_INLINE void set_depth(int val)
+        { 
+            depth_ = val;
+        }
+        
+        KRT_INLINE double ray_parameter() const
+        { 
+            return ray_parameter_;
+        }
+        
+        KRT_INLINE void set_ray_parameter(double val)
+        { 
+            ray_parameter_ = val;
+        }
+        
+        KRT_INLINE std::shared_ptr<krt::World> world() const
+        { 
+            return world_; 
+        }
+        
+        KRT_INLINE void set_world(std::shared_ptr<krt::World> val)
+        { 
+            world_ = val; 
+        }
+        
+        KRT_INLINE std::shared_ptr<krt::Material> material() const
+        {
+            return material_;
+        }
+        
+        KRT_INLINE void set_material(std::shared_ptr<krt::Material> val)
+        {
+            material_ = val;
+        }
     private:
         bool hit_an_object_;		// Did the ray hit an object?  
         RGBColor color_;

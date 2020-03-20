@@ -37,12 +37,13 @@ namespace krt
     class RGBColor
     {
     public:
-        float   red_, green_, blue_;
+        float red_, green_, blue_;
     public:
         RGBColor();                                     // default constructor
         RGBColor(float c);                                  // constructor
         RGBColor(float r, float g, float b);                // constructor
         RGBColor(const RGBColor& c);                        // copy constructor
+        RGBColor(RGBColor&& c);
         ~RGBColor();                                    // destructor
 
         RGBColor& operator= (const RGBColor& rhs);
@@ -54,35 +55,42 @@ namespace krt
 
         KRT_INLINE RGBColor& operator+= (const RGBColor& c)
         {
-            red_ += c.red_; green_ += c.green_; blue_ += c.blue_;
-            return (*this);
+            red_ += c.red_; 
+            green_ += c.green_; 
+            blue_ += c.blue_;
+            
+            return *this;
         }
 
         KRT_INLINE RGBColor operator* (const float a) const
         {
-            return (RGBColor(red_ * a, green_ * a, blue_ * a));
+            return RGBColor(red_ * a, green_ * a, blue_ * a);
         }
 
         KRT_INLINE RGBColor& operator*= (const float a)
         {
-            red_ *= a; green_ *= a; blue_ *= a;
-            return (*this);
+            red_ *= a; 
+            green_ *= a; 
+            blue_ *= a;
+            return *this;
         }
 
         KRT_INLINE RGBColor operator/ (const float a) const
         {
-            return (RGBColor(red_ / a, green_ / a, blue_ / a));
+            return RGBColor(red_ / a, green_ / a, blue_ / a);
         }
 
         KRT_INLINE RGBColor& operator/= (const float a)
         {
-            red_ /= a; green_ /= a; blue_ /= a;
-            return (*this);
+            red_ /= a; 
+            green_ /= a; 
+            blue_ /= a;
+            return *this;
         }
 
         KRT_INLINE RGBColor operator* (const RGBColor& c) const
         {
-            return (RGBColor(red_ * c.red_, green_ * c.green_, blue_ * c.blue_));
+            return RGBColor(red_ * c.red_, green_ * c.green_, blue_ * c.blue_);
         }
 
         KRT_INLINE bool operator== (const RGBColor& c) const

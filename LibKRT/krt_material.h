@@ -30,17 +30,25 @@ ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALI
 #ifndef krt_material_h__
 #define krt_material_h__
 
+#include "krt_object.h"
+
 namespace krt
 {
 	class ShadeHelper;
 	class RGBColor;
 
-	class Material
+	class Material : public Object
 	{
 	public:
 		Material();
 
+        Material(const char* name);
+
+        Material(const std::string& name);
+
 		Material(const Material& material);
+
+        Material(Material&& rhs);
 
 		virtual ~Material();
 

@@ -62,7 +62,7 @@ namespace krt
 
         glm::dvec3 get_direction(const glm::dvec2& p) const;
      
-        virtual void render_scene(const World* w) override;
+        virtual void render_scene(World* w) override;
 
     private:
         /** * @brief 摄像机到视平面的距离  */

@@ -15,61 +15,56 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER I
 ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **************************************************************************************************************************/
 /*!
- * \file krt_lib_pch.h
- * \date 2018/12/26 13:50
+ * \file krt_material.h
+ * \date 2018/12/26 17:29
  *
  * \author www.xionggf.com
  * Contact: sun_of_lover@sina.com
  *
  * \brief 
  *
- * TODO: 包含KumaRT库使用各头文件，也作为工程的预编译头文件
+ * TODO: long description
  *
  * \note
 */
-#ifndef krt_lib_pch_h__
-#define krt_lib_pch_h__
+#ifndef krt_flat_color_material_h__
+#define krt_flat_color_material_h__
 
-#include <string>
-#include <vector>
-#include <list>
-#include <map>
-#include <algorithm>
-#include <array>
-#include <memory>
-#include <exception>
-#include <iosfwd>
-#include <sstream>
-#include <fstream>
-#include <bitset>
-#include <cstdint>
-#include <functional>
-#include <set>
-#include <array>
-#include <cstdlib>
-#include <cfloat>
+#include "krt_material.h"
+#include "krt_color_rgb.h"
 
-#ifndef  GLM_FORCE_SSE2
-#define  GLM_FORCE_SSE2
-#endif
+namespace krt
+{
+	class ShadeHelper;
+	class RGBColor;
 
-#ifndef  GLM_FORCE_INLINE
-#define  GLM_FORCE_INLINE
-#endif
+    class FlatColorMaterial: public Material
+	{
+	public:
+        FlatColorMaterial(float r, float g, float b);
 
-#ifndef  GLM_MESSAGES
-#define  GLM_MESSAGES
-#endif
+        FlatColorMaterial(const char* name,float r,float g,float b);
 
-#ifndef GLM_ENABLE_EXPERIMENTAL
-#define GLM_ENABLE_EXPERIMENTAL
-#endif
+        FlatColorMaterial(const std::string& name, float r, float g, float b);
 
-#include "glm.hpp"
-#include "gtc/matrix_transform.hpp"
-#include "gtc/type_ptr.hpp"
-#include "gtx/transform.hpp"
-#include "gtc/quaternion.hpp"
-#include "gtx/quaternion.hpp"
+        FlatColorMaterial(const FlatColorMaterial& rhs);
 
-#endif // krt_lib_pch_h__
+        FlatColorMaterial(FlatColorMaterial&& rhs);
+
+		virtual ~FlatColorMaterial();
+
+		virtual RGBColor shade(ShadeHelper& sr);
+
+        virtual std::shared_ptr<Object> Clone() const override;
+
+        FlatColorMaterial& operator= (const FlatColorMaterial& rhs);
+    private:
+        RGBColor color_;
+	};
+
+	typedef std::shared_ptr<FlatColorMaterial> FlatColorMaterialSPtr;
+}
+
+#endif // krt_flat_color_material_h__
+
+

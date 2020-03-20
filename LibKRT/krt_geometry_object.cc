@@ -26,6 +26,18 @@ namespace krt
 	{
 	}
 
+    GeometricObject::GeometricObject(const char* name) :Object(name),
+        color_(0.0f, 0.0f, 0.0f), material_(nullptr), shadows_(true)
+    {
+
+    }
+
+    GeometricObject::GeometricObject(const std::string& name) :Object(name),
+        color_(0.0f, 0.0f, 0.0f), material_(nullptr), shadows_(true)
+    {
+
+    }
+
 	GeometricObject::GeometricObject(const GeometricObject& object): 
         color_(object.color_),shadows_(object.shadows_)
 	{

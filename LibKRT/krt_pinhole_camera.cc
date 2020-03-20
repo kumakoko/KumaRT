@@ -44,10 +44,10 @@ namespace krt
         return glm::normalize(p.x * basis_vector_u_ + p.y * basis_vector_v_ - d * basis_vector_w_);
     }
 
-    void Pinhole::render_scene(const World* w)
+    void Pinhole::render_scene(World* w)
     {
         RGBColor	L;
-        ViewPlane	vp = w->vp;//(w.vp);
+        ViewPlane&	vp = w->view_plane();//(w.vp);
         Ray			ray;
         int 		depth = 0;
         glm::dvec2 	pp;		// sample point on a pixel    
@@ -59,6 +59,7 @@ namespace krt
         int v_res = vp.vertical_image_resolution();
         int h_res = vp.horizontal_image_resolution();
         int px_sz = vp.pixel_size();
+        const Tracer* tracer = w->tracer();
 
         for (int r = 0; r < v_res; r++)			// up
         {
@@ -73,7 +74,7 @@ namespace krt
                         pp.x = px_sz * (c - 0.5 * h_res + (q + 0.5) / n);
                         pp.y = px_sz * (r - 0.5 * v_res + (p + 0.5) / n);
                         ray.set_direction(get_direction(pp));
-                        L += w->tracer_ptr->trace_ray(ray, depth);
+                        L += tracer->trace_ray(ray, depth);
                     }
                 }
 

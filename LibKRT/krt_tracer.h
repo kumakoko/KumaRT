@@ -22,7 +22,7 @@ namespace krt
         virtual RGBColor trace_ray(const Ray& ray) const;
         virtual RGBColor trace_ray(const Ray& ray, const int depth) const;
     protected:
-        std::weak_ptr<World> world_ptr;
+        std::shared_ptr<World> world_ptr_;
     };
 }
 

@@ -43,6 +43,7 @@
 #include "krt_lib_pch.h"
 #include "krt_world.h"
 #include "krt_math.h"
+#include "krt_tools_macro.h"
 
 namespace krt
 {
@@ -53,50 +54,52 @@ namespace krt
     // camera_ptr is set to nullptr because the build functions will always have to construct a camera
     // and set its parameters
 
-    World::World(void) : background_color_(0.0f, 0.0f, 0.0f),
-        tracer_ptr(nullptr),
-        ambient_ptr(/*new Ambient*/),
-        camera_ptr(nullptr)
+    World::World() : background_color_(0.0f, 0.0f, 0.0f),tracer_(nullptr)
     {
     }
 
-    World::~World(void)
+    World::World(const char* name) : Object(name), background_color_(0.0f, 0.0f, 0.0f), tracer_(nullptr)
     {
-        if (tracer_ptr)
-        {
-            delete tracer_ptr;
-            tracer_ptr = nullptr;
-        }
+    }
 
-        ambient_ptr.reset();
-        camera_ptr.reset();
+    World::World(const std::string& name) : Object(name), background_color_(0.0f, 0.0f, 0.0f), tracer_(nullptr)
+    {
+    }
 
+    World::~World()
+    {
+        ambient_light_.reset();
+        main_camera_.reset();
         delete_objects();
         delete_lights();
     }
 
+    void World::Cleanup()
+    {
+        KRT_SAFE_DELETE(tracer_);
+    }
 
     //------------------------------------------------------------------ render_scene
 
     // This uses orthographic viewing along the zw axis
 
-    void World::render_scene(void) const
+    void World::render_scene()
     {
         RGBColor	pixel_color;
         Ray			ray;
-        int 		hres = vp.horizontal_image_resolution();
-        int 		vres = vp.vertical_image_resolution();
-        float		s = vp.pixel_size();
+        int 		hres = view_plane_.horizontal_image_resolution();
+        int 		vres = view_plane_.vertical_image_resolution();
+        float		s = view_plane_.pixel_size();
         float		zw = 100.0;				// hardwired in
 
         ray.set_direction(glm::dvec3(0, 0, -1));
 
         for (int r = 0; r < vres; r++)			// up
         {
-            for (int c = 0; c <= hres; c++)
+            for (int c = 0; c < hres; c++)
             {	// across 					
                 ray.set_origin(glm::dvec3(s * (c - hres / 2.0 + 0.5), s * (r - vres / 2.0 + 0.5), zw));
-                pixel_color = tracer_ptr->trace_ray(ray);
+                pixel_color = tracer_->trace_ray(ray);
                 display_pixel(r, c, pixel_color);
             }
         }
@@ -139,48 +142,60 @@ namespace krt
     // the function SetCPixel is a Mac OS function
 
 
-    void World::display_pixel(const int row, const int column, const RGBColor& raw_color) const
+    void World::display_pixel(const int row, const int column, const RGBColor& raw_color)
     {
         RGBColor mapped_color;
 
-        if (vp.show_out_of_gamut())
+        if (view_plane_.show_out_of_gamut())
             mapped_color = clamp_to_color(raw_color);
         else
             mapped_color = max_to_one(raw_color);
 
-        if (vp.gamma_correction_factor() != 1.0)
-            mapped_color = mapped_color.Powc(vp.inverse_gamma_correction_factor());
+        if (view_plane_.gamma_correction_factor() != 1.0)
+            mapped_color = mapped_color.Powc(view_plane_.inverse_gamma_correction_factor());
 
         //have to start from max y coordinate to convert to screen coordinates
         int x = column;
-        int y = vp.vertical_image_resolution() - row - 1;
+        int y = view_plane_.vertical_image_resolution() - row - 1;
 
         //paintArea->setPixel(x, y, (int)(mapped_color.r * 255),
         //    (int)(mapped_color.g * 255),
         //    (int)(mapped_color.b * 255));
+        this->WritePixelToBuffer(x, y, (int)(mapped_color.red_ * 255), (int)(mapped_color.green_ * 255), (int)(mapped_color.blue_ * 255));
     }
 
+    void World::WritePixelToBuffer(int x, int y, int red, int green, int blue)
+    {
+
+    }
+
+    void World::MakePixelBuffer()
+    {
+    }
+
+    void World::SavePixelToImageFile(const char* img_file)
+    {
+    }
     // ----------------------------------------------------------------------------- hit_objects
 
     ShadeHelper World::hit_objects(const Ray& ray)
     {
         //shared_from_this
         ShadeHelper	sr;
-        sr.set_world(shared_from_this());
-
+        sr.set_world(std::dynamic_pointer_cast<World>(shared_from_this()));
         double		t;
         glm::dvec3 normal;// Normal normal;
         glm::dvec3 local_hit_point;
         double		tmin = HUGE_VALUE;
-        int 		num_objects = objects.size();
+        int 		num_objects = objects_.size();
 
         for (int j = 0; j < num_objects; j++)
         {
-            if (objects[j]->hit(ray, t, sr) && (t < tmin))
+            if (objects_[j]->hit(ray, t, sr) && (t < tmin))
             {
                 sr.set_hit_an_object(true);
                 tmin = t;
-                sr.set_material(objects[j]->get_material());
+                sr.set_material(objects_[j]->get_material());
                 sr.set_hit_point(ray.GetTargetPoint(t));
                 normal = sr.normal();
                 local_hit_point = sr.local_hit_point();
@@ -200,28 +215,28 @@ namespace krt
     // Deletes the objects in the objects array, and erases the array.
     // The objects array still exists, because it's an automatic variable, but it's empty 
 
-    void World::delete_objects(void)
+    void World::delete_objects()
     {
-        int num_objects = objects.size();
+        int num_objects = objects_.size();
 
         for (int j = 0; j < num_objects; j++)
         {
-            objects[j].reset();
+            objects_[j].reset();
         }
 
-        objects.erase(objects.begin(), objects.end());
+        objects_.erase(objects_.begin(), objects_.end());
     }
 
-    void World::delete_lights(void)
+    void World::delete_lights()
     {
-        int num_lights = lights.size();
+        int num_lights = lights_.size();
 
         for (int j = 0; j < num_lights; j++)
         {
-            lights[j].reset();
+            lights_[j].reset();
         }
 
-        lights.erase(lights.begin(), lights.end());
+        lights_.erase(lights_.begin(), lights_.end());
     }
 
 }

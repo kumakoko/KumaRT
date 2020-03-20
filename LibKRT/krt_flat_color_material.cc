@@ -18,45 +18,60 @@ ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALI
 #include "krt_lib_pch.h"
 #include "krt_color_rgb.h"
 #include "krt_shade_helper.h"
-#include "krt_material.h"
+#include "krt_flat_color_material.h"
 
 namespace krt
 {
-	Material::Material():Object("KRT-Material")
+    FlatColorMaterial::FlatColorMaterial(float r, float g, float b):Material("KRT-FlatColorMaterial")
 	{
+        color_.red_ = r;
+        color_.green_ = g;
+        color_.blue_ = b;
 	}
 
-    Material::Material(const char* name):Object(name)
+    FlatColorMaterial::FlatColorMaterial(const char* name, float r, float g, float b):Material(name)
     {
-
+        color_.red_ = r;
+        color_.green_ = g;
+        color_.blue_ = b;
     }
 
-    Material::Material(const std::string& name) : Object(name) 
+    FlatColorMaterial::FlatColorMaterial(const std::string& name, float r, float g, float b) : Material(name)
     {
+        color_.red_ = r;
+        color_.green_ = g;
+        color_.blue_ = b;
     }
 
-    Material::Material(Material&& rhs)
+    FlatColorMaterial::FlatColorMaterial(FlatColorMaterial&& rhs)
     {
+        color_ = rhs.color_;
     }
 
-	Material::Material(const Material& m) 
+    FlatColorMaterial::FlatColorMaterial(const FlatColorMaterial& rhs)
 	{
+        color_ = rhs.color_;
 	}
 
-	Material& Material::operator= (const Material& rhs) 
+    FlatColorMaterial& FlatColorMaterial::operator= (const FlatColorMaterial& rhs)
 	{
 		if (this == &rhs)
-			return (*this);
+			return *this;
 
-		return (*this);
+		return *this;
 	}
 
-	Material::~Material()
+    FlatColorMaterial::~FlatColorMaterial()
 	{
 	}
 
-	RGBColor Material::shade(ShadeHelper& sr) 
+	RGBColor FlatColorMaterial::shade(ShadeHelper& sr)
 	{
-		return RGBColor(0.0f, 0.0f, 0.0f);
+        return color_;
 	}
+
+    std::shared_ptr<Object> FlatColorMaterial::Clone() const
+    {
+        return std::make_shared<FlatColorMaterial>(*this);
+    }
 }

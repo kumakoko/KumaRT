@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="krt_ambient_light.h" />
     <ClInclude Include="krt_camera.h" />
+    <ClInclude Include="krt_flat_color_material.h" />
     <ClInclude Include="krt_light.h" />
     <ClInclude Include="krt_math.h" />
     <ClInclude Include="krt_optics.h" />
@@ -44,6 +45,7 @@
   <ItemGroup>
     <ClCompile Include="krt_ambient_light.cc" />
     <ClCompile Include="krt_camera.cc" />
+    <ClCompile Include="krt_flat_color_material.cc" />
     <ClCompile Include="krt_light.cc" />
     <ClCompile Include="krt_optics.cc" />
     <ClCompile Include="krt_pinhole_camera.cc" />
@@ -122,12 +124,16 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IntDir>..\Temp\$(ProjectName)\$(Configuration)\</IntDir>
+    <OutDir>bin\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <IntDir>..\Temp\$(ProjectName)\$(Configuration)\</IntDir>
+    <OutDir>bin\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>

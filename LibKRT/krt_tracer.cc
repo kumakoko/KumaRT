@@ -7,14 +7,14 @@ namespace krt
     {
     }
 
-    Tracer::Tracer(std::shared_ptr<World> _world_ptr) : world_ptr(_world_ptr)
+    Tracer::Tracer(std::shared_ptr<World> _world_ptr) : world_ptr_(_world_ptr)
     {
-        world_ptr = _world_ptr;
+        world_ptr_ = _world_ptr;
     }
 
     Tracer::~Tracer() 
     {
-        world_ptr.reset();
+        world_ptr_.reset();
     }
 
     RGBColor Tracer::trace_ray(const Ray& ray) const 

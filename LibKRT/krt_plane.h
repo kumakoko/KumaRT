@@ -36,13 +36,21 @@ namespace krt
     public:
         Plane();
 
+        Plane(const char* name);
+
+        Plane(const std::string& name);
+
+        Plane(const char* name,const glm::dvec3& point, const glm::dvec3& normal);
+
+        Plane(const std::string& name,const glm::dvec3& point, const glm::dvec3& normal);
+
         Plane(const glm::dvec3& point, const glm::dvec3& normal);
 
         Plane(const Plane& plane);
 
         Plane(Plane&& rhs);
 
-        virtual GeometricObjectSPtr clone() const override;
+        virtual std::shared_ptr<Object> Clone() const override;
 
         Plane& operator= (const Plane& rhs);
 

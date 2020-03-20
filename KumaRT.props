@@ -5,6 +5,7 @@
     <WXWIDGETS_HEADER>../third-lib/wxWidgets-3.1.3/include</WXWIDGETS_HEADER>
     <WXWIDGETS_LIB_X86>../third-lib/wxWidgets-3.1.3/lib/vc_dll</WXWIDGETS_LIB_X86>
     <GLM_HEADER>../third-lib/glm/0.9.9.5/include/glm</GLM_HEADER>
+    <SVPNG_HEADER>../third-lib/svpng</SVPNG_HEADER>
   </PropertyGroup>
   <PropertyGroup />
   <ItemDefinitionGroup />
@@ -17,6 +18,9 @@
     </BuildMacro>
     <BuildMacro Include="GLM_HEADER">
       <Value>$(GLM_HEADER)</Value>
+    </BuildMacro>
+    <BuildMacro Include="SVPNG_HEADER">
+      <Value>$(SVPNG_HEADER)</Value>
     </BuildMacro>
   </ItemGroup>
 </Project>

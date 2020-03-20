@@ -5,12 +5,30 @@ namespace krt
 {
     const double Plane::kEpsilon = 0.001;
 
-    Plane::Plane(void) : GeometricObject(), point_(0.0), normal_(0, 1, 0)
+    Plane::Plane() : GeometricObject("KRT-Plane"), point_(0.0), normal_(0, 1, 0)
+    {
+    }
+
+    Plane::Plane(const char* name) : GeometricObject(name), point_(0.0), normal_(0, 1, 0)
+    {
+    }
+
+    Plane::Plane(const std::string& name) : GeometricObject(name), point_(0.0), normal_(0, 1, 0)
+    {
+    }
+
+    Plane::Plane(const char* name, const glm::dvec3& point, const glm::dvec3& normal):
+        GeometricObject(name), point_(point), normal_(normal)
+    {
+    }
+
+    Plane::Plane(const std::string& name, const glm::dvec3& point, const glm::dvec3& normal):
+        GeometricObject(name), point_(point), normal_(normal)
     {
     }
 
     Plane::Plane(const glm::dvec3& point, const glm::dvec3& normal) :
-        GeometricObject(), point_(point), normal_(normal)
+        GeometricObject("KRT-Plane"), point_(point), normal_(normal)
     {
         normal_ = glm::normalize(normal_); // normal_.normalize();
     }
@@ -26,9 +44,9 @@ namespace krt
     {
     }
 
-    GeometricObjectSPtr Plane::clone() const
+    std::shared_ptr<Object> Plane::Clone() const
     {
-        return std::make_shared<Plane>(this->point_, this->normal_);
+        return std::make_shared<Plane>(*this);
     }
 
     Plane& Plane::operator = (const Plane& rhs)

@@ -41,54 +41,38 @@ namespace krt
     {
     public:
         /*********************************************************
-        
-        @return 
-        @see function  
-        @note           
-        @attention      
-        @bug            
-        @warning        
+        缺省构造函数        
         *********************************************************/
         Sphere(); 
 
+        Sphere(const char* name);
+
+        Sphere(const std::string& name);
+
         /*********************************************************
-        
+        构造函数
         @param  const glm::dvec3 & center
-        @param  double r
-        @return 
-        @see function  
-        @note           
-        @attention      
-        @bug            
-        @warning        
+        @param  double r       
         *********************************************************/
         Sphere(const glm::dvec3& center, double r);
 
+        Sphere(const char* name,const glm::dvec3& center, double r);
+
+        Sphere(const std::string& name,const glm::dvec3& center, double r);
+
         /*********************************************************
-        
-        @param  const Sphere & sphere
-        @return 
-        @see function  
-        @note           
-        @attention      
-        @bug            
-        @warning        
+        拷贝构造函数
+        @param  const Sphere & sphere      
         *********************************************************/
         Sphere(const Sphere& sphere);
 
         /*********************************************************
-        
-        @param  Sphere & & sphere
-        @return 
-        @see function  
-        @note           
-        @attention      
-        @bug            
-        @warning        
+        移动构造函数
+        @param  Sphere & & sphere       
         *********************************************************/
         Sphere(Sphere&& sphere);
 
-        virtual GeometricObjectSPtr clone() const;
+        virtual std::shared_ptr<Object> Clone() const override;
 
         virtual	~Sphere(void);
 

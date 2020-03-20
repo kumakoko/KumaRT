@@ -5,9 +5,9 @@
  * \author www.xionggf.com
  * Contact: sun_of_lover@sina.com
  *
- * \brief 
+ * \brief
  *
- * TODO: 
+ * TODO:
  *
  * \note
 */
@@ -35,57 +35,115 @@
 
 namespace krt
 {
-    class RenderThread;
-
-    class World : public std::enable_shared_from_this<World>
+    class World : public Object
     {
     public:
-        ViewPlane   vp;
-        RGBColor    background_color_;
-        Tracer*     tracer_ptr;
-        LightSPtr   ambient_ptr;
-        CameraSPtr  camera_ptr;    
-        std::vector<GeometricObjectSPtr> objects;
-        std::vector<LightSPtr> lights;
-        RenderThread* paintArea; 	//connection to skeleton - wxRaytracer.h
-    public:
+        KRT_INLINE RGBColor background_color() const
+        {
+            return background_color_;
+        }
+
         World();
+
+        World(const char* name);
+
+        World(const std::string& name);
+
         ~World();
+
+        virtual void Cleanup();
 
         KRT_INLINE void add_object(GeometricObjectSPtr object_ptr)
         {
-            objects.push_back(object_ptr);
+            objects_.push_back(object_ptr);
         }
 
         KRT_INLINE void add_light(LightSPtr light_ptr)
         {
-            lights.push_back(light_ptr);
+            lights_.push_back(light_ptr);
         }
 
         KRT_INLINE void set_ambient_light(LightSPtr light_ptr)
         {
-            ambient_ptr = light_ptr;
+            ambient_light_ = light_ptr;
         }
 
         KRT_INLINE void set_camera(CameraSPtr c_ptr)
         {
-            camera_ptr = c_ptr;
+            main_camera_ = c_ptr;
         }
 
         virtual void build() = 0;
 
-        void render_scene() const;
+        void render_scene();
 
         RGBColor max_to_one(const RGBColor& c) const;
 
         RGBColor clamp_to_color(const RGBColor& c) const;
 
-        void display_pixel(const int row, const int column, const RGBColor& pixel_color) const;
+        void display_pixel(const int row, const int column, const RGBColor& pixel_color);
+
+
+        /*********************************************************
+        把屏幕坐标系(x,y)对应的像素点的颜色值写入到缓冲区种
+        @param  int x
+        @param  int y
+        @param  int red
+        @param  int green
+        @param  int blue
+        *********************************************************/
+        virtual void WritePixelToBuffer(int x, int y, int red, int green, int blue);
+
+        virtual void MakePixelBuffer();
+
+        virtual void SavePixelToImageFile(const char* img_file);
 
         ShadeHelper hit_objects(const Ray& ray);
-    private:
+
+        KRT_INLINE ViewPlane& view_plane()
+        {
+            return view_plane_;
+        }
+
+        KRT_INLINE const ViewPlane& view_plane() const
+        {
+            return view_plane_;
+        }
+
+        KRT_INLINE const Tracer* tracer() const
+        {
+            return tracer_;
+        }
+
+        KRT_INLINE Tracer* tracer()
+        {
+            return tracer_;
+        }
+
+    protected:
         void delete_objects();
         void delete_lights();
+    protected:
+        /** * @brief 视平面  */
+        ViewPlane view_plane_;
+
+        /** * @brief 缺省的背景色  */
+        RGBColor background_color_;
+
+        /** * @brief 光线追踪器  */
+        Tracer* tracer_;
+
+        /** * @brief 默认的环境光  */
+        LightSPtr ambient_light_;
+
+        /** * @brief 默认的主摄像机  */
+        CameraSPtr main_camera_;
+        
+        /** * @brief 场景中的几何体对象  */
+        std::vector<GeometricObjectSPtr> objects_;
+
+        /** * @brief 场景中的光源  */
+        std::vector<LightSPtr> lights_;
     };
 }
 

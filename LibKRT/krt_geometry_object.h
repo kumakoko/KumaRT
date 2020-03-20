@@ -28,6 +28,7 @@ ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALI
 
 #include "krt_tools_macro.h"
 #include "krt_color_rgb.h"
+#include "krt_object.h"
 #include "krt_material.h"
 
 namespace krt
@@ -36,13 +37,17 @@ namespace krt
     class ShadeHelper;
     class BoundingBox;
 
-    class GeometricObject
+    class GeometricObject : public Object
     {
     public:
         /****************************************
         *  缺省构造函数
         ****************************************/
         GeometricObject();
+
+        GeometricObject(const char* name);
+
+        GeometricObject(const std::string& name);
 
         /****************************************
         *  拷贝构造函数
@@ -55,8 +60,6 @@ namespace krt
         *  @param GeometricObject&& rhs 作为拷贝源的右值对象
         ****************************************/
         GeometricObject(GeometricObject&& rhs);
-
-        virtual std::shared_ptr<GeometricObject> clone() const = 0;
 
         virtual ~GeometricObject();
 

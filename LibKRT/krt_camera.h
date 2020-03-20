@@ -56,7 +56,7 @@ namespace krt
 
         virtual ~Camera();
 
-        virtual void render_scene(const World* w) = 0;
+        virtual void render_scene(World* w) = 0;
 
         KRT_INLINE void set_eye(const glm::dvec3& p)
         {

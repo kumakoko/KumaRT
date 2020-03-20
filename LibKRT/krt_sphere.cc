@@ -32,7 +32,26 @@ namespace krt
     
     }
 
-    GeometricObjectSPtr Sphere::clone() const
+    Sphere::Sphere(const char* name): GeometricObject(name)
+    {
+    }
+
+    Sphere::Sphere(const std::string& name) : GeometricObject(name)
+    {
+    }
+
+
+    Sphere::Sphere(const char* name, const glm::dvec3& center, double r) : GeometricObject(name)
+    {
+
+    }
+
+    Sphere::Sphere(const std::string& name, const glm::dvec3& center, double r) : GeometricObject(name)
+    {
+
+    }
+
+    std::shared_ptr<Object> Sphere::Clone() const
     {
         return std::make_shared<Sphere>(*this);
     }
@@ -51,7 +70,7 @@ namespace krt
     Sphere& Sphere::operator= (const Sphere& rhs)
     {
         if (this == &rhs)
-            return (*this);
+            return *this;
 
         center_ = rhs.center_;
         radius_ = rhs.radius_;
