@@ -83,7 +83,7 @@ namespace krt
 
     // This uses orthographic viewing along the zw axis
 
-    void World::render_scene()
+    void World::RenderScene()
     {
         RGBColor	pixel_color;
         Ray			ray;
@@ -100,7 +100,7 @@ namespace krt
             {	// across 					
                 ray.set_origin(glm::dvec3(s * (c - hres / 2.0 + 0.5), s * (r - vres / 2.0 + 0.5), zw));
                 pixel_color = tracer_->trace_ray(ray);
-                display_pixel(r, c, pixel_color);
+                DisplayPixel(r, c, pixel_color);
             }
         }
     }
@@ -108,7 +108,7 @@ namespace krt
 
     // ------------------------------------------------------------------ clamp
 
-    RGBColor World::max_to_one(const RGBColor& c) const
+    RGBColor World::MaxToOne(const RGBColor& c) const
     {
         float max_value = std::max(c.red_, std::max(c.green_, c.blue_));
         return max_value > 1.0 ? c / max_value : c;
@@ -118,7 +118,7 @@ namespace krt
     // ------------------------------------------------------------------ clamp_to_color
     // Set color to red if any component is greater than one
 
-    RGBColor World::clamp_to_color(const RGBColor& raw_color) const
+    RGBColor World::ClampToColor(const RGBColor& raw_color) const
     {
         RGBColor c(raw_color);
 
@@ -142,14 +142,14 @@ namespace krt
     // the function SetCPixel is a Mac OS function
 
 
-    void World::display_pixel(const int row, const int column, const RGBColor& raw_color)
+    void World::DisplayPixel(const int row, const int column, const RGBColor& raw_color)
     {
         RGBColor mapped_color;
 
         if (view_plane_.show_out_of_gamut())
-            mapped_color = clamp_to_color(raw_color);
+            mapped_color = ClampToColor(raw_color);
         else
-            mapped_color = max_to_one(raw_color);
+            mapped_color = MaxToOne(raw_color);
 
         if (view_plane_.gamma_correction_factor() != 1.0)
             mapped_color = mapped_color.Powc(view_plane_.inverse_gamma_correction_factor());
@@ -178,7 +178,7 @@ namespace krt
     }
     // ----------------------------------------------------------------------------- hit_objects
 
-    ShadeHelper World::hit_objects(const Ray& ray)
+    ShadeHelper World::HitObjects(const Ray& ray)
     {
         //shared_from_this
         ShadeHelper	sr;

@@ -6,21 +6,8 @@
  * Contact: sun_of_lover@sina.com
  *
  * \brief
- *
- * TODO:
- *
- * \note
 */
 
-
-// This file contains the declaration of the class World
-// The World class does not have a copy constructor or an assignment operator, for the followign reasons:
-
-// 1 	There's no need to copy construct or assign the World
-// 2 	We wouldn't want to do this anyway, because the world can contain an arbitray amount of data
-// 3 	These operations wouldn't work because the world is self-referencing:
-//	 	the Tracer base class contains a pointer to the world. If we wrote a correct copy constructor for the 
-// 	  	Tracer class, the World copy construtor would call itself recursively until we ran out of memory. 
 #ifndef krt_world_h__
 #define krt_world_h__
 
@@ -38,51 +25,146 @@ namespace krt
     class World : public Object
     {
     public:
+        /*********************************************************
+        拿到本场景对应的默认背景颜色，用来作为显示窗口的缺省背景颜色
+        @return 本场景对应的默认背景颜色        
+        *********************************************************/
         KRT_INLINE RGBColor background_color() const
         {
             return background_color_;
         }
 
+        /*********************************************************
+        构造函数        
+        *********************************************************/
         World();
 
+        /*********************************************************
+        构造函数
+        @param  const char* name 该场景的名字     
+        *********************************************************/
         World(const char* name);
 
+        /*********************************************************
+        构造函数
+        @param  const std::string& name 该场景的名字         
+        *********************************************************/
         World(const std::string& name);
 
+        /*********************************************************
+        析构函数       
+        *********************************************************/
         ~World();
 
+        /*********************************************************
+        在删除本对象，执行析构函数之前，需要主动调用一下此函数，用来清理
+        一下本对象所引用到的其他资源       
+        *********************************************************/
         virtual void Cleanup();
 
-        KRT_INLINE void add_object(GeometricObjectSPtr object_ptr)
+        /*********************************************************
+        给本场景添加几何对象
+        @param  GeometricObjectSPtr object_ptr 几何对象      
+        *********************************************************/
+        KRT_INLINE void AddGeometryObject(GeometricObjectSPtr object_ptr)
         {
             objects_.push_back(object_ptr);
         }
 
-        KRT_INLINE void add_light(LightSPtr light_ptr)
+        KRT_INLINE void AddLight(LightSPtr light_ptr)
         {
             lights_.push_back(light_ptr);
         }
 
+        /*********************************************************
+        
+        @param  LightSPtr light_ptr
+        @return 
+        @see function  
+        @note           
+        @attention      
+        @bug            
+        @warning        
+        *********************************************************/
         KRT_INLINE void set_ambient_light(LightSPtr light_ptr)
         {
             ambient_light_ = light_ptr;
         }
 
+        /*********************************************************
+        
+        @param  CameraSPtr c_ptr
+        @return 
+        @see function  
+        @note           
+        @attention      
+        @bug            
+        @warning        
+        *********************************************************/
         KRT_INLINE void set_camera(CameraSPtr c_ptr)
         {
             main_camera_ = c_ptr;
         }
 
-        virtual void build() = 0;
+        /*********************************************************
+        
+        @return 
+        @see function  
+        @note           
+        @attention      
+        @bug            
+        @warning        
+        *********************************************************/
+        virtual void Build() = 0;
 
-        void render_scene();
+        /*********************************************************
+        
+        @return 
+        @see function  
+        @note           
+        @attention      
+        @bug            
+        @warning        
+        *********************************************************/
+        void RenderScene();
 
-        RGBColor max_to_one(const RGBColor& c) const;
+        /*********************************************************
+        
+        @param  const RGBColor & c
+        @return 
+        @see function  
+        @note           
+        @attention      
+        @bug            
+        @warning        
+        *********************************************************/
+        RGBColor MaxToOne(const RGBColor& c) const;
 
-        RGBColor clamp_to_color(const RGBColor& c) const;
+        /*********************************************************
+        
+        @param  const RGBColor & c
+        @return 
+        @see function  
+        @note           
+        @attention      
+        @bug            
+        @warning        
+        *********************************************************/
+        RGBColor ClampToColor(const RGBColor& c) const;
 
-        void display_pixel(const int row, const int column, const RGBColor& pixel_color);
-
+        /*********************************************************
+        
+        @param  const int row
+        @param  const int column
+        @param  const RGBColor & pixel_color
+        @return 
+        @see function  
+        @note           
+        @attention      
+        @bug            
+        @warning        
+        *********************************************************/
+        void DisplayPixel(const int row, const int column, const RGBColor& pixel_color);
 
         /*********************************************************
         把屏幕坐标系(x,y)对应的像素点的颜色值写入到缓冲区种
@@ -94,11 +176,40 @@ namespace krt
         *********************************************************/
         virtual void WritePixelToBuffer(int x, int y, int red, int green, int blue);
 
+        /*********************************************************
+        
+        @return 
+        @see function  
+        @note           
+        @attention      
+        @bug            
+        @warning        
+        *********************************************************/
         virtual void MakePixelBuffer();
 
+        /*********************************************************
+        
+        @param  const char * img_file
+        @return 
+        @see function  
+        @note           
+        @attention      
+        @bug            
+        @warning        
+        *********************************************************/
         virtual void SavePixelToImageFile(const char* img_file);
 
-        ShadeHelper hit_objects(const Ray& ray);
+        /*********************************************************
+        
+        @param  const Ray & ray
+        @return 
+        @see function  
+        @note           
+        @attention      
+        @bug            
+        @warning        
+        *********************************************************/
+        ShadeHelper HitObjects(const Ray& ray);
 
         KRT_INLINE ViewPlane& view_plane()
         {

@@ -80,7 +80,7 @@ namespace krt
 
                 L /= vp.num_samples_per_pixel();
                 L *= exposure_time_;
-                w->display_pixel(r, c, L);
+                w->DisplayPixel(r, c, L);
             }
         }
     }
